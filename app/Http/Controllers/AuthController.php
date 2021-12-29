@@ -13,7 +13,7 @@ class AuthController extends Controller
         $http = new \GuzzleHttp\Client;
 
         try {
-            $response = $http->post('http://api.alakod.com/oauth/token', [
+            $response = $http->post('https://api.alakod.com/oauth/token', [
                 'form_params' => [
                     'grant_type' => 'password',
                     'client_id' => 2,
