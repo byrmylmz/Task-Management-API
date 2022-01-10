@@ -12,7 +12,8 @@
         "laravel/framework": "^8.54",
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
-        "monolog/monolog": "^2.3"
+        "monolog/monolog": "^2.3",
+        "spatie/laravel-permission": "^5.4"
     },
 
     "require-dev": {
