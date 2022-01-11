@@ -18,7 +18,7 @@ class AuthController extends Controller
                     'grant_type' => 'password',
                     'client_id' => 2,
                     'client_secret' => 'JUso52NZnx283jkgoabVChZaQ17lCFjkQbdb1UDJ',
-                    'username' => $request->username,
+                    'username' => $request->email,
                     'password' => $request->password,
                 ]
             ]);
@@ -43,7 +43,7 @@ class AuthController extends Controller
         ]);
 
         return User::create([
-            'name' => $request->name,
+            'name' => $request->fullName,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
