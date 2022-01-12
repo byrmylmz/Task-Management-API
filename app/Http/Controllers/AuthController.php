@@ -11,13 +11,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $http = new \GuzzleHttp\Client;
-
+        //config('services.passport.login_endpoint')
         try {
-            $response = $http->post('https://api.alakod.com/oauth/token', [
+            $response = $http->post(config('services.passport.login_endpoint'), [
                 'form_params' => [
                     'grant_type' => 'password',
-                    'client_id' => 2,
-                    'client_secret' => 'JUso52NZnx283jkgoabVChZaQ17lCFjkQbdb1UDJ',
+                    'client_id' => config('services.passport.client_id'),
+                    'client_secret' => config('services.passport.client_secret'),
                     'username' => $request->email,
                     'password' => $request->password,
                 ]

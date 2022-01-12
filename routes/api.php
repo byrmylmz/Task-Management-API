@@ -23,6 +23,11 @@ Route::fallback(function(){
         'message' => 'Page Not Found. If error persists, contact bayramyilmaz061@gmail.com'], 404);
 });
 
+
+Route::get('/test',function(){
+    return response('test');
+})->middleware('auth:api');
+
 Route::middleware('auth:api')->group(function(){
     Route::get('/user', function (Request $request) {
         return $request->user();
