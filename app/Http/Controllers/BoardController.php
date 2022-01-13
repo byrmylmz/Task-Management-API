@@ -15,7 +15,7 @@ class BoardController extends Controller
      */
     public function index()
     {
-        return Board::orderBy('order','DESC')->get();
+        return Board::orderBy('order')->get();
     }
     /**
      |-----------------------------------------------------------
