@@ -7,17 +7,24 @@ use Illuminate\Http\Request;
 
 class BoardController extends Controller
 {
+     /**
+     |-----------------------------------------------------------
+     | index
+     |-----------------------------------------------------------
+     */
     public function index()
     {
-        return Board::all();
+        return Board::all()->OrderBy('order')->get();
     }
-
+    /**
+     |-----------------------------------------------------------
+     | Store
+     |-----------------------------------------------------------
+     */
     public function store(Request $request)
     {   
 
-        /**
-         * validation will be done later
-         */
+        //validation will be later
 
         Board::create(
             [
@@ -27,5 +34,27 @@ class BoardController extends Controller
         );
 
         return response('Successfully created', 200);
+    }
+    /**
+     |-----------------------------------------------------------
+     | Update all
+     |-----------------------------------------------------------
+     */
+    public function updateAll(Request $request)
+    {
+        $boards = Board::all();
+        foreach ($boards as $board){
+            $board->timestamp= false;
+            $id = $board->id;
+            foreach($request->boards as $boardFontEnd){
+                if($boardFontEnd['id']==$id){
+                    $board->update(['order'=>$boardFontEnd['order']]);
+                }
+            }
+
+        }
+        return response('tamamdir',200);
+
+        
     }
 }

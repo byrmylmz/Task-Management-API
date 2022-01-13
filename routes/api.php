@@ -51,6 +51,7 @@ use Illuminate\Support\Facades\Route;
          */
         Route::get('boards',[BoardController::class,'index']);
         Route::post('boards',[BoardController::class,'store']);
+        Route::put('updateAll',[BoardController::class,'updateAll']);
     });
 
 
