@@ -54,7 +54,7 @@ class BoardController extends Controller
             }
 
         }
-        return response('tamamdir',200);
+        return response($boards);
 
 
     }
