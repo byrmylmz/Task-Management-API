@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BoardController extends Controller
 {
@@ -14,7 +15,7 @@ class BoardController extends Controller
      */
     public function index()
     {
-        return Board::all()->OrderBy('order')->get();
+        return Board::orderBy('order','DESC')->get();
     }
     /**
      |-----------------------------------------------------------
@@ -55,6 +56,6 @@ class BoardController extends Controller
         }
         return response('tamamdir',200);
 
-        
+
     }
 }
