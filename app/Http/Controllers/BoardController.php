@@ -45,7 +45,7 @@ class BoardController extends Controller
     {
         $boards = Board::all();
         foreach ($boards as $board){
-            $board->timestamp= false;
+            $board->timestamps = false;
             $id = $board->id;
             foreach($request->boards as $boardFontEnd){
                 if($boardFontEnd['id']==$id){

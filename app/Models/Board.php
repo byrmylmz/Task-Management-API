@@ -9,7 +9,6 @@ class Board extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','title','order'];
+    protected $fillable = ['id','user_id','title','order'];
 
-    protected $hidden = ['created_at','updated_at'];
 }
