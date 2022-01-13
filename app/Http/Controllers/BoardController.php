@@ -55,7 +55,22 @@ class BoardController extends Controller
 
         }
         return response($boards);
+    }
+        /**
+     |-----------------------------------------------------------
+     | Update partial
+     |-----------------------------------------------------------
+     */
+    public function update(Request $request, Board $board)
+    {
+       
 
+        $data = $request->validate([
+            'title'=>'required|string',
+        ]);
 
+        $board->update($data);
+
+        return response($board,200);
     }
 }
