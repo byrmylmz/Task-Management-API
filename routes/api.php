@@ -2,14 +2,15 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\TodosController;
+use App\Models\Board;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,8 +28,14 @@ use Illuminate\Support\Facades\Route;
 
 
     Route::get('/test',function(){
-        return response('test');
-    })->middleware('auth:api');
+        $users=User::pluck('id')->toArray();
+        //return response($users);
+        $random=Arr::random($users);
+         return response($random);
+
+       // return response(Arr::random($users));
+       
+    });
 
     Route::middleware('auth:api')->group(function(){
         /* User Information */
@@ -52,7 +59,13 @@ use Illuminate\Support\Facades\Route;
         Route::delete('/boards/{board}',[BoardController::class,'destroy']);
 
         /* Columns */
-        Route::get('columns',[ColumnController::class,'index']);
+        Route::get('/columns',[ColumnController::class,'index']);
+
+        /* Category */
+        Route::get('/categories',[CategoryController::class,'index']);
+        Route::post('/categories',[CategoryController::class,'store']);
+        Route::patch('/categories/{category}',[CategoryController::class,'update']);
+        Route::delete('/categories/{category}',[CategoryController::class,'destroy']);
     });
 
 
@@ -63,3 +76,4 @@ use Illuminate\Support\Facades\Route;
      */
     Route::post('/login', [AuthController::class,'login']);
     Route::post('/register', [AuthController::class,'register']);
+
