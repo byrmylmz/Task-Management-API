@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\TodosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,15 +31,11 @@ use Illuminate\Support\Facades\Route;
     })->middleware('auth:api');
 
     Route::middleware('auth:api')->group(function(){
-        /**
-         * user information
-         */
+        /* User Information */
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
-        /**
-         * todo list 
-         */
+        /* Todo list */
         Route::get('/todos',[TodosController::class,'index']);
         Route::post('/todos',[TodosController::class,'store']);
         Route::patch('/todos/{todo}',[TodosController::class,'update']);
@@ -46,13 +43,16 @@ use Illuminate\Support\Facades\Route;
         Route::delete('/todos/{todo}',[TodosController::class,'destroy']);
         Route::delete('/todosDeleteCompleted',[TodosController::class,'destroyCompleted']);
         Route::middleware('auth:api')->post('/logout', [AuthController::class,'logout']);
-        /**
-         * Boards api list
-         */
+
+        /* Boards */
         Route::get('/boards',[BoardController::class,'index']);
         Route::post('/boards',[BoardController::class,'store']);
-        Route::put('/updateAll',[BoardController::class,'updateAll']);
-        Route::patch('/update/{board}',[BoardController::class,'update']);
+        Route::put('/boards/updateAll',[BoardController::class,'updateAll']);
+        Route::patch('/boards/update/{board}',[BoardController::class,'update']);
+        Route::delete('/boards/{board}',[BoardController::class,'destroy']);
+
+        /* Columns */
+        Route::get('columns',[ColumnController::class,'index']);
     });
 
 

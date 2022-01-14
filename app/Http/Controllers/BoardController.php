@@ -8,39 +8,24 @@ use Illuminate\Support\Facades\DB;
 
 class BoardController extends Controller
 {
-     /**
-     |-----------------------------------------------------------
-     | index
-     |-----------------------------------------------------------
-     */
+    //----------------------------------------------------------------
     public function index()
     {
         return Board::orderBy('order')->get();
     }
-    /**
-     |-----------------------------------------------------------
-     | Store
-     |-----------------------------------------------------------
-     */
+    //----------------------------------------------------------------
     public function store(Request $request)
     {   
-
-        //validation will be later
-
         Board::create(
             [
-               'user_id'=>auth()->user()->id,
-               'title'=>$request->title
-            ]
-        );
-
-        return response('Successfully created', 200);
-    }
-    /**
-     |-----------------------------------------------------------
-     | Update all
-     |-----------------------------------------------------------
-     */
+                'user_id'=>auth()->user()->id,
+                'title'=>$request->title
+                ]
+            );
+            
+            return response('Successfully created', 200);
+        }
+    //----------------------------------------------------------------
     public function updateAll(Request $request)
     {
         $boards = Board::all();
@@ -52,25 +37,22 @@ class BoardController extends Controller
                     $board->update(['order'=>$boardFontEnd['order']]);
                 }
             }
-
         }
         return response($boards);
     }
-        /**
-     |-----------------------------------------------------------
-     | Update partial
-     |-----------------------------------------------------------
-     */
+    //----------------------------------------------------------------
     public function update(Request $request, Board $board)
     {
-       
-
         $data = $request->validate([
             'title'=>'required|string',
         ]);
-
         $board->update($data);
-
         return response($board,200);
+    }
+    //----------------------------------------------------------------
+    public function destroy(Board $board)
+    {
+        $board->delete();
+        return response('deleted',200);
     }
 }

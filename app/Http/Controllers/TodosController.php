@@ -117,7 +117,7 @@ class TodosController extends Controller
         $todo->delete();
         return response('deleted todo item',200);
     }
-
+    //-----------------------------------------------------------------------
     public function destroyCompleted(Request $request,Todo $todo)
     {
         $todosToDelete=$request->todo;
