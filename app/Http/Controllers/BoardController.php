@@ -19,7 +19,8 @@ class BoardController extends Controller
         Board::create(
             [
                 'user_id'=>auth()->user()->id,
-                'title'=>$request->title
+                'title'=>$request->title,
+                'category_id'=>$request->category_id
                 ]
             );
             
