@@ -10,6 +10,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "laravel/cashier-paddle": "^1.4",
         "laravel/framework": "^8.54",
+        "fakerphp/faker": "^1.9.1",
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "monolog/monolog": "^2.3",
@@ -18,7 +19,6 @@
 
     "require-dev": {
         "facade/ignition": "^2.5",
-        "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
