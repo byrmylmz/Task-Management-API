@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserIdScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,13 @@ class Card extends Model
 {
     use HasFactory;
     protected $fillable=['user_id','title','column_id'];
+    /**
+     * The booted method of the model.
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new UserIdScope);
+    }
 
     /**
      * Get the tasks for the card.

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserIdScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,13 @@ class Board extends Model
     use HasFactory;
 
     protected $fillable = ['id','user_id','category_id','title','order'];
+    /**
+     * The booted method of the model.
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new UserIdScope);
+    }
 
     /**
      * Get the columns for the board.
