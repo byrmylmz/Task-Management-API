@@ -18,7 +18,6 @@ class CreateCardsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->foreignId('column_id')->constrained();
-            $table->foreignId('board_id')->constrained();
             $table->timestamps();
         });
     }

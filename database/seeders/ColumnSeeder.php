@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Column;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ColumnSeeder extends Seeder
@@ -13,6 +15,6 @@ class ColumnSeeder extends Seeder
      */
     public function run()
     {
-        //
+       Column::factory()->count(3)->create();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserIdScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,8 +51,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * The booted method of the model.
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new UserIdScope);
+    }
+    
+    /**
+     * Get todo item for the user
+     */
     public function todos()
     {
         return $this->hasMany(Todo::class);
+    }
+
+    /**
+     * Get the boards for the user
+     */
+    public function boards()
+    {
+        return $this->hasMany(Board::class);
     }
 }
