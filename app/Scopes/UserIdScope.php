@@ -20,7 +20,7 @@ class UserIdScope implements Scope
      public function apply(Builder $builder, Model $model)
      {
          if(Auth::hasUser()){
-            $builder->where('id',1);
+            $builder->where('user_id','=',auth()->user()->id);
          }
      }
 }
