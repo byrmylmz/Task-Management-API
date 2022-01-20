@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     /**
+     * Permissions middlewares
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:see categories')->only('index');
+        $this->middleware('permission:create categories')->only('store');
+        $this->middleware('permission:updateAll categories')->only('updateAll');
+        $this->middleware('permission:update categories')->only('update');
+        $this->middleware('permission:delete categories')->only('destroy');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

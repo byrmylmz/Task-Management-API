@@ -28,11 +28,18 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        
         if (! $this->app->routesAreCached()) {
             Passport::routes();
         }
-
-        //
+        /**
+         * Implicitly grant Super Admin role all permissions.
+         * This works in the app by using gate-related function 
+         * like: auth()->user->can() and in @can()
+         */
+        Gate::before(function($user,$ability){
+            return $this->hasRole('super-admin') ? true : null;
+        });
+        
     }
 }
