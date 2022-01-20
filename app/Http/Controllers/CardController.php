@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
+    /**
+     * Permissions middlewares
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:see cards')->only('index');
+        $this->middleware('permission:create cards')->only('store');
+        $this->middleware('permission:updateAll cards')->only('updateAll');
+        $this->middleware('permission:update cards')->only('update');
+        $this->middleware('permission:delete cards')->only('destroy');
+    }
     //-------------------------------------------------------------------
     public function index()
     {

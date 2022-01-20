@@ -6,7 +6,19 @@ use App\Models\Column;
 use Illuminate\Http\Request;
 
 class ColumnController extends Controller
-{
+{   
+     /**
+     * Permissions middlewares
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:see columns')->only('index');
+        $this->middleware('permission:create columns')->only('store');
+        $this->middleware('permission:updateAll columns')->only('updateAll');
+        $this->middleware('permission:update columns')->only('update');
+        $this->middleware('permission:delete columns')->only('destroy');
+    }
+
     //-------------------------------------------------------------------
     public function index()
     {

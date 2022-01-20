@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    /**
+     * Permissions middlewares
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:see tasks')->only('index');
+        $this->middleware('permission:create tasks')->only('store');
+        $this->middleware('permission:updateAll tasks')->only('updateAll');
+        $this->middleware('permission:update tasks')->only('update');
+        $this->middleware('permission:delete tasks')->only('destroy');
+    }
+    
     //-------------------------------------------------------------------
     public function index()
     {

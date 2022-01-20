@@ -61,6 +61,7 @@ use Illuminate\Support\Facades\Route;
         Route::delete('/boards/{board}',[BoardController::class,'destroy']);
 
         /* Columns */
+        Route::get('/columns',[ColumnController::class,'index']);
         Route::post('/columns',[ColumnController::class,'store']);
         Route::patch('/columns/{column}',[ColumnController::class,'update']);
         Route::delete('/columns/{column}',[ColumnController::class,'destroy']);

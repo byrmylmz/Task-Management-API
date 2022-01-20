@@ -7,7 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BoardController extends Controller
-{
+{   
+    /**
+     * Permissions middlewares
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:see boards')->only('index');
+        $this->middleware('permission:create boards')->only('store');
+        $this->middleware('permission:updateAll boards')->only('updateAll');
+        $this->middleware('permission:update boards')->only('update');
+        $this->middleware('permission:delete boards')->only('destroy');
+    }
     //----------------------------------------------------------------
     public function index()
     {
