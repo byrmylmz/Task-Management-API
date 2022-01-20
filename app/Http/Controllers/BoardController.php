@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
+
 use App\Models\Board;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +25,9 @@ class BoardController extends Controller
     //----------------------------------------------------------------
     public function index()
     {
-        return Board::orderBy('order')->get();
+        $boards=Board::orderBy('order')->get()->keyBy->id;
+        $board_id=Board::find(2);
+        return new UserCollection($boards);
     }
     //----------------------------------------------------------------
     public function store(Request $request)

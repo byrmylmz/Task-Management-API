@@ -21,7 +21,7 @@ class Card extends Model
     /**
      * Get the tasks for the card.
      */
-    public function cards()
+    public function tasks()
     {
         return $this->hasMany(Task::class);  
     }

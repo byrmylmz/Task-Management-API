@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Category\CategoryCollection;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -28,6 +30,15 @@ class CategoryController extends Controller
         $categories=Category::all();
         return response($categories);
     }
+    /**
+     * Categories with Boards
+     */
+
+     public function categoriesWithBoards()
+     {
+        $categories=Category::all();
+        return new CategoryCollection($categories);
+     }
 
     /**
      * Store a newly created resource in storage.

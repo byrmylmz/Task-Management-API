@@ -49,6 +49,7 @@ use Illuminate\Support\Facades\Route;
         
         /* Category */
         Route::get('/categories',[CategoryController::class,'index']);
+        Route::get('/categories-with-boards',[CategoryController::class,'categoriesWithBoards']);
         Route::post('/categories',[CategoryController::class,'store']);
         Route::patch('/categories/{category}',[CategoryController::class,'update']);
         Route::delete('/categories/{category}',[CategoryController::class,'destroy']);
@@ -62,6 +63,7 @@ use Illuminate\Support\Facades\Route;
 
         /* Columns */
         Route::get('/columns',[ColumnController::class,'index']);
+        Route::get('/column-with-cards-and-tasks',[ColumnController::class,'columnWithCardsAndTasks']);
         Route::post('/columns',[ColumnController::class,'store']);
         Route::patch('/columns/{column}',[ColumnController::class,'update']);
         Route::delete('/columns/{column}',[ColumnController::class,'destroy']);

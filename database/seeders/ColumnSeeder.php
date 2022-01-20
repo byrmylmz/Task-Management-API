@@ -15,6 +15,6 @@ class ColumnSeeder extends Seeder
      */
     public function run()
     {
-       Column::factory()->count(3)->create();
+       Column::factory()->count(200)->create();
     }
 }

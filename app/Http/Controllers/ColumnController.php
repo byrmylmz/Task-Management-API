@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Column\ColumnCollection;
 use App\Models\Column;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,16 @@ class ColumnController extends Controller
         return response($columns);
         
     }
+
+    /**
+     * Column with cards and tasks api
+     */
+    public function columnWithCardsAndTasks()
+    {
+        $columns=Column::all();
+        return new ColumnCollection($columns);
+    }
+
     //-------------------------------------------------------------------
     public function store(Request $request) 
     {

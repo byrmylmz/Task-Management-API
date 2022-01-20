@@ -19,4 +19,12 @@ class Category extends Model
         static::addGlobalScope(new UserIdScope);
     }
 
+    /**
+     * get the boards for the category.
+     */
+    public function boards()
+    {
+        return $this->hasMany(Board::class);
+    }
+
 }
