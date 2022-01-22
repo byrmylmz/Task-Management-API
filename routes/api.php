@@ -5,6 +5,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\PassportController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TodosController;
 use App\Models\Board;
@@ -88,6 +89,7 @@ use Illuminate\Support\Facades\Route;
      | Auth Login and Register
      |----------------------------------
      */
+    Route::post('/oauth/token', [PassportController::class,'auth']);
     Route::post('/login', [AuthController::class,'login']);
     Route::post('/register', [AuthController::class,'register']);
 

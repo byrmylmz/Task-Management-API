@@ -9,6 +9,7 @@ use Laravel\Passport\Passport;
 
 
 
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -37,8 +38,8 @@ class AuthServiceProvider extends ServiceProvider
          * This works in the app by using gate-related function 
          * like: auth()->user->can() and in @can()
          */
-        Gate::before(function($user,$ability){
-            return $this->hasRole('super-admin') ? true : null;
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('super-admin') ? true : null;
         });
         
     }

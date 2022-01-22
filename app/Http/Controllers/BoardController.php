@@ -25,9 +25,9 @@ class BoardController extends Controller
     //----------------------------------------------------------------
     public function index()
     {
-        $boards=Board::orderBy('order')->get()->keyBy->id;
-        $board_id=Board::find(2);
-        return new UserCollection($boards);
+        $boards=Board::orderBy('order')->get();
+        return response($boards);
+       
     }
     //----------------------------------------------------------------
     public function store(Request $request)
