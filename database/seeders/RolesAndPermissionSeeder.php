@@ -77,6 +77,7 @@ class RolesAndPermissionSeeder extends Seeder
             [
                 'name'=>'Bayram Yilmaz',
                 'email'=>'bayramyilmaz061@gmail.com',
+                'trial_until' => NULL,
                 'password'=>Hash::make('12345678'),
             ]);
         $user->assignRole($role1);
@@ -85,6 +86,7 @@ class RolesAndPermissionSeeder extends Seeder
             [
                 'name'=>'Bayram Keles',
                 'email'=>'bayramkeles61@gmail.com',
+                'trial_until' => NULL,
                 'password'=>Hash::make('12345678'),
             ]);
         $user->assignRole($role1);

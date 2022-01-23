@@ -30,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'trial_until',
     ];
 
     /**
@@ -41,6 +42,19 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * the attributes that will use carbon operation
+     */
+    protected $dates = [
+        'trial_until'
+    ];
+
+    /**
+     *  The accessorts to append to the Model's array form
+     *  free_trial_days_left
+     */
+    protected $appends = ['free_trial_days_left'];
 
     /**
      * The attributes that should be cast.
@@ -57,6 +71,20 @@ class User extends Authenticatable
     protected static function booted()
     {
         static::addGlobalScope(new UserIdScope);
+    }
+
+    /**
+     | Attribute for how many days remain as trial.
+     */
+
+    public function getFreeTrialDaysLeftAttribute()
+    {
+        // Future field which will be implement after payment.
+        // if($this->plan_until){
+        //     return 0;
+        // }
+
+        return $this->attributes = now()->diffInDays($this->trial_until,false);
     }
     
     /**

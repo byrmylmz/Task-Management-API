@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Route;
         
     });
 
-    Route::middleware('auth:api')->group(function(){
+    Route::middleware(['auth:api','trial'])->group(function(){
         /* User Information */
         Route::get('/user', function (Request $request) {
             return $request->user();

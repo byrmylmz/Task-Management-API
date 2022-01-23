@@ -125,6 +125,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+  
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -233,5 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    
+    'free_trial_days'=>14,
 
 ];

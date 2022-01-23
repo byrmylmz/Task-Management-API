@@ -44,6 +44,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'trial_until' => now()->addDays(config('app.free_trial_days')),
         ]);
     }
 
