@@ -1,0 +1,119 @@
+name: Deploy to DigitalOcean
+
+on: [push]
+
+jobs:
+  Create-Deployment-Artifacts:
+    name: Create Deployment Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Compile CSS and Javascript
+        run: |
+          npm install
+          npm run prod
+      - name: Configure PHP 8.0
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 8.0
+          extensions: mbstring, ctype, fileinfo, openssl, PDO, bcmath, json, tokenizer, xml
+
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --no-interaction --prefer-dist
+
+      - name: Create deployment artifact
+        env: 
+          GITHUB_SHA: ${{ github.sha }}
+        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules --exclude=tests *
+        
+      - name: Store artifact for distribution
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-build
+          path: ${{ github.sha }}.tar.gz
+
+  prepare-release-on-servers:
+    name: "Digital Ocean Deployment"
+    runs-on: ubuntu-latest
+    needs: create-deployment-artifacts
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: app-build
+      - name: Upload
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: ${{ github.sha }}.tar.gz
+          target: ${{ secrets.TARGET }}/artifacts
+          
+      - name: Extract archive and create directories
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          envs: GITHUB_SHA
+          script: |
+            mkdir -p "${{ secrets.TARGET }}/releases/${GITHUB_SHA}"
+            tar xzf ${{ secrets.TARGET }}/artifacts/${GITHUB_SHA}.tar.gz -C "${{ secrets.TARGET }}/releases/${GITHUB_SHA}"
+            rm -rf ${{ secrets.TARGET }}/releases/${GITHUB_SHA}/storage
+
+            mkdir -p ${{ secrets.TARGET }}/storage/{app,public,framework,logs}
+            mkdir -p ${{ secrets.TARGET }}/storage/framework/{cache,sessions,testing,views}
+            mkdir -p ${{ secrets.TARGET }}/storage/framework/cache/data
+            chmod -R 0777 ${{ secrets.TARGET }}/storage
+
+  active-release:
+    name: "Active Release To Digital Ocean"
+    runs-on: ubuntu-latest 
+    needs: [ create-deployment-artifacts, prepare-release-on-servers ]
+    steps:
+      - name: Active Release
+        uses: appleboy/ssh-action@master
+        env: 
+          GITHUB_SHA: ${{ github.sha }}
+          RELEASE_PATH: ${{ secrets.TARGET }}/releases/${{ github.sha }}
+          ACTIVE_RELEASE_PATH: ${{ secrets.TARGET }}/current
+          STORAGE_PATH: ${{ secrets.TARGET }}/storage
+          BASE_PATH: ${{ secrets.TARGET }}
+          LARAVEL_ENV: ${{ secrets.LARAVEL_ENV }}
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,lARAVEL_ENV
+          script: |
+            printf "%s" "$LARAVEL_ENV" > "${BASE_PATH}/.env"
+            ln -s -f ${BASE_PATH}/.env $RELEASE_PATH
+            ln -s -f $STORAGE_PATH $RELEASE_PATH
+            ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
+            service php8.0-fpm reload
+
+  clean-up:
+    name: "Cleaning Digital Ocean"
+    runs-on: ubuntu-latest 
+    needs: [ create-deployment-artifacts, prepare-release-on-servers, active-release]
+    steps:
+      - name: Cleaning files
+        uses: appleboy/ssh-action@master
+        env: 
+          RELEASE_PATH: ${{ secrets.TARGET }}/releases
+          ARTIFACTS_PATH: ${{ secrets.TARGET }}/artifacts
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          envs: RELEASE_PATH, ARTIFACTS_PATH
+          script: |
+            cd $RELEASE_PATH && ls -t -1 | tail -n +6 | xargs rm -rf
+            cd $ARTIFACTS_PATH && ls -t -1 | tail -n +6 | xargs rm -rf
