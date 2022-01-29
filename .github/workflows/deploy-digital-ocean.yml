@@ -22,15 +22,6 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-dev --no-interaction --prefer-dist
 
-      - name: Config:Cache Cleaning
-        run: php artisan config:cache
-
-      - name: Route:Cache Cleaning
-        run: php artisan route:cache
-
-      - name: View:Cache Cleaning
-        run: php artisan view:cache
-
       - name: Create deployment artifact
         env: 
           GITHUB_SHA: ${{ github.sha }}
@@ -106,6 +97,15 @@ jobs:
             ln -s -f $STORAGE_PATH $RELEASE_PATH
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
             service php8.0-fpm reload
+
+      - name: Config:Cache Cleaning
+        run: php artisan config:cache
+
+      - name: Route:Cache Cleaning
+        run: php artisan route:cache
+
+      - name: View:Cache Cleaning
+        run: php artisan view:cache
 
   clean-up:
     name: "Cleaning Digital Ocean"
