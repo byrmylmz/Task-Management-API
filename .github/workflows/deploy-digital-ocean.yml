@@ -99,7 +99,9 @@ jobs:
             service php8.0-fpm reload
 
       - name: Config:Cache Cleaning
-        run: ${BASE_PATH}/current php artisan config:cache
+        run: |
+          cd ${BASE_PATH}/current
+          php artisan config:cache
 
       - name: Route:Cache Cleaning
         run: php artisan route:cache
