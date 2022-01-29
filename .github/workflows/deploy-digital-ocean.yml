@@ -98,17 +98,6 @@ jobs:
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
             service php8.0-fpm reload
 
-      - name: Config:Cache Cleaning
-        run: |
-          cd ${{ secrets.TARGET }}/current
-          php artisan config:cache
-
-      - name: Route:Cache Cleaning
-        run: php artisan route:cache
-
-      - name: View:Cache Cleaning
-        run: php artisan view:cache
-
   clean-up:
     name: "Cleaning Digital Ocean"
     runs-on: ubuntu-latest 
@@ -128,3 +117,25 @@ jobs:
           script: |
             cd $RELEASE_PATH && ls -t -1 | tail -n +6 | xargs rm -rf
             cd $ARTIFACTS_PATH && ls -t -1 | tail -n +6 | xargs rm -rf
+
+  cache-up:
+    name: "Cleaning caches"
+    runs-on: ubuntu-latest 
+    needs: [ create-deployment-artifacts, prepare-release-on-servers, active-release, clean-up]
+    steps:
+      - name: Cleaning files
+        uses: appleboy/ssh-action@master
+        env: 
+          RELEASE_PATH: ${{ secrets.TARGET }}/releases
+          ARTIFACTS_PATH: ${{ secrets.TARGET }}/artifacts
+          CURRENT_PATH: ${{ secrets.TARGET }}/current
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          envs: RELEASE_PATH, ARTIFACTS_PATH, CURRENT_PATH
+          script: |
+            cd $CURRENT_PATH && php artisan config:cache
+
+
