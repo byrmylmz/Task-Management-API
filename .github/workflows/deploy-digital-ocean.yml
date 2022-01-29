@@ -100,7 +100,7 @@ jobs:
 
       - name: Config:Cache Cleaning
         run: |
-          cd ${BASE_PATH}/current
+          cd ${{ secrets.TARGET }}/current
           php artisan config:cache
 
       - name: Route:Cache Cleaning
