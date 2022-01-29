@@ -21,10 +21,16 @@ jobs:
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --no-interaction --prefer-dist
+
+      - name: Config:Cache Cleaning
         run: php artisan config:cache
+
+      - name: Route:Cache Cleaning
         run: php artisan route:cache
+
+      - name: View:Cache Cleaning
         run: php artisan view:cache
-        
+
       - name: Create deployment artifact
         env: 
           GITHUB_SHA: ${{ github.sha }}
