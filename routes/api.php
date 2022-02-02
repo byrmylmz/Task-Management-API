@@ -31,7 +31,7 @@ Route::get('/auth/callback', function () {
     //     'Email'=> $user->getEmail(),
     //     'Avatar'=> $user->getAvatar(),
     // ]);
-    return response($user->getId());
+    return $user->getId()->toJson();
 });
 
 /*
