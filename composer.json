@@ -6,12 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "fakerphp/faker": "^1.9.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/cashier-paddle": "^1.4",
         "laravel/framework": "^8.54",
-        "fakerphp/faker": "^1.9.1",
         "laravel/passport": "^10.1",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "monolog/monolog": "^2.3",
         "spatie/laravel-permission": "^5.4"
