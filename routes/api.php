@@ -24,13 +24,14 @@ Route::get('/auth/redirect', function () {
 Route::get('/auth/callback', function () {
     $user = Socialite::driver('google')->stateless()->user();
 
-    return response()->json([
-        'name'=> $user->getId(),
-        'NickName'=> $user->getNickname(),
-        'Name'=> $user->getName(),
-        'Email'=> $user->getEmail(),
-        'Avatar'=> $user->getAvatar(),
-    ]);
+    // return response()->json([
+    //     'name'=> $user->getId(),
+    //     'NickName'=> $user->getNickname(),
+    //     'Name'=> $user->getName(),
+    //     'Email'=> $user->getEmail(),
+    //     'Avatar'=> $user->getAvatar(),
+    // ]);
+    return response($user->getId());
 });
 
 /*
