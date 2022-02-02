@@ -14,6 +14,19 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('google')->stateless()
+     ->redirect();
+});
+
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('google')->stateless()->user();
+
+    return response($user->getNickname());
+});
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
