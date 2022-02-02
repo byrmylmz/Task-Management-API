@@ -24,7 +24,7 @@ Route::get('/auth/redirect', function () {
 Route::get('/auth/callback', function () {
     $user = Socialite::driver('google')->stateless()->user();
 
-    return response($user);
+    return response('ok');
 });
 
 /*
