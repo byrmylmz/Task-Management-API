@@ -28,38 +28,44 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $googleUser = Socialite::driver('google')->stateless()->user();
-        return response($googleUser->token);
 
-        // $user = User::where('provider_id', $googleUser->id)->first();
 
-        // if ($user) {
-        //     $user->update([
-        //         'provider_token' => $googleUser->token,
-        //     ]);
-        // } else {
-        //     $user = User::create([
-        //         'name' => $googleUser->name,
-        //         'email' => $googleUser->email,
-        //         'trial_until' => now()->addDays(config('app.free_trial_days')),
-        //         'provider_name'=>'google',
-        //         'provider_id' => $googleUser->id,
-        //         'provider_token' => $googleUser->token,
-        //     ]);
-        // }
+        $user = User::where('provider_id', $googleUser->id)->first();
 
-        // // delete all token first
-        // // actually I can revoke old token first.
-        // $user->tokens()->delete();
-        // // find role first then assign this solution i found.
-        // $roleToAssign = Role::findByName('trial', 'api');
-        // $user->assignRole($roleToAssign);
+        $email=User::where('email',$googleUser->email)->first();
 
-        // $token = $user->createToken('google')->accessToken;
-        // //return the token for usage
-        // return response()->json([
-        //     'success' => true,
-        //     'token' => $token
-        // ]);
+        if($email){
+            return response('This user is already registered. Please use forgot password.');
+        }
+
+        if ($user) {
+            $user->update([
+                'provider_token' => $googleUser->token,
+            ]);
+        } else {
+            $user = User::create([
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'trial_until' => now()->addDays(config('app.free_trial_days')),
+                'provider_name'=>'google',
+                'provider_id' => $googleUser->id,
+                'provider_token' => $googleUser->token,
+            ]);
+        }
+
+        // delete all token first
+        // actually I can revoke old token first.
+        $user->tokens()->delete();
+        // find role first then assign this solution i found.
+        $roleToAssign = Role::findByName('trial', 'api');
+        $user->assignRole($roleToAssign);
+
+        $token = $user->createToken('google')->accessToken;
+        //return the token for usage
+        return response()->json([
+            'success' => true,
+            'token' => $token
+        ]);
 
             
     }
