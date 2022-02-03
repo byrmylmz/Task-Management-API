@@ -31,6 +31,9 @@ class User extends Authenticatable
         'email',
         'password',
         'trial_until',
+        'provider_name',
+        'provider_id',
+        'provider_token'
     ];
 
     /**

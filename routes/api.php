@@ -21,6 +21,10 @@ Route::get('/auth/redirect',[LoginController::class,'redirectToProvider']);
 
 Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
 
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,7 +42,13 @@ Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
 
 
     Route::get('/test',function(){
+        $user = User::find(1);
         
+
+            // Creating a token without scopes...
+            // $token = $user->createToken('Token Name')->accessToken; 
+       
+
     });
 
     Route::middleware(['auth:api','trial'])->group(function(){
