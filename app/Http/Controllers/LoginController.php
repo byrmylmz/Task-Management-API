@@ -56,10 +56,7 @@ class LoginController extends Controller
 
         $token = $user->createToken('google')->accessToken;
         //return the token for usage
-        return response()->json([
-            'success' => true,
-            'token' => $token
-        ]);
+        return response($token);
 
             
     }
