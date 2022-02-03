@@ -34,9 +34,9 @@ class LoginController extends Controller
 
         $email=User::where('email',$googleUser->email)->first();
 
-        if($email){
-            return response('This user is already registered. Please use forgot password.');
-        }
+        // if($email){
+        //     return response('This user is already registered. Please use forgot password.');
+        // }
 
         if ($user) {
             $user->update([
