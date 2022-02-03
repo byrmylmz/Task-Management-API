@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardController;
@@ -16,23 +17,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
-Route::get('/auth/redirect', function () {
-    return Socialite::driver('google')->stateless()
-     ->redirect();
-});
+Route::get('/auth/redirect',[LoginController::class,'redirectToProvider']);
 
-Route::get('/auth/callback', function () {
-    $user = Socialite::driver('google')->stateless()->user();
-
-    // return response()->json([
-    //     'name'=> $user->getId(),
-    //     'NickName'=> $user->getNickname(),
-    //     'Name'=> $user->getName(),
-    //     'Email'=> $user->getEmail(),
-    //     'Avatar'=> $user->getAvatar(),
-    // ]);
-    return response($user->name);
-});
+Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
 
 /*
 |--------------------------------------------------------------------------
