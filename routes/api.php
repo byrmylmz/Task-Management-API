@@ -17,6 +17,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
+
+
 Route::get('/auth/redirect',[LoginController::class,'redirectToProvider']);
 
 Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
