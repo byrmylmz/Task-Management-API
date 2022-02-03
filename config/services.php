@@ -39,7 +39,7 @@ return [
     'google' => [    
         'client_id' => '19503759575-80rbkahqo8bnrcpq7cnd6m9p559m4l2u.apps.googleusercontent.com',  
         'client_secret' => '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',  
-        'redirect' => 'https://13ff-31-145-217-231.ngrok.io/api/auth/callback'
+        'redirect' => 'https://api.alakod.com/api/auth/callback'
       ],
 
 ];
