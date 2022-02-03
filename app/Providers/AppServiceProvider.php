@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // $this->app->configure('services'); 
     }
 
     /**
@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         // if($this->app->environment('Production')) {
         //     \URL::forceScheme('https');
         // }
+        
         JsonResource::withoutWrapping();
        
     }
