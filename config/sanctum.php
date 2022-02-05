@@ -13,7 +13,11 @@ return [
     |
     */
 
-    'stateful' => explode('','api.alakod.com,sanctum.alakod.com'),
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+        '%s%s',
+        'api.alakod.com,sanctum.alakod.com',
+        env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
+    ))),
 
     /*
     |--------------------------------------------------------------------------
