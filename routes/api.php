@@ -45,19 +45,17 @@ Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
 
     Route::get('/test',function(){
         $user = User::find(1);
-        
-
-            // Creating a token without scopes...
-            // $token = $user->createToken('Token Name')->accessToken; 
-       
-
     });
 
-    Route::middleware(['auth:api','trial'])->group(function(){
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+    
+    Route::middleware(['auth:sanctum','trial'])->group(function(){
         /* User Information */
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
+        // Route::get('/user', function (Request $request) {
+        //     return $request->user();
+        // });
         /* Todo list */
         Route::get('/todos',[TodosController::class,'index']);
         Route::post('/todos',[TodosController::class,'store']);
@@ -108,7 +106,26 @@ Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
      | Auth Login and Register
      |----------------------------------
      */
-    Route::post('/oauth/token', [PassportController::class,'auth']);
-    Route::post('/login', [AuthController::class,'login']);
-    Route::post('/register', [AuthController::class,'register']);
+   // Route::post('/oauth/token', [PassportController::class,'auth']);
+    Route::post('/sanctum/token', function (Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'device_name' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        return $user->createToken($request->device_name)->plainTextToken;
+    });
+
+
+    // Route::post('/login', [AuthController::class,'login']);
+    // Route::post('/register', [AuthController::class,'register']);
 

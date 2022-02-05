@@ -30,9 +30,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         
-        if (! $this->app->routesAreCached()) {
-            Passport::routes();
-        }
+     
         /**
          * Implicitly grant Super Admin role all permissions.
          * This works in the app by using gate-related function 

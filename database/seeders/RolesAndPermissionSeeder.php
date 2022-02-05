@@ -22,47 +22,47 @@ class RolesAndPermissionSeeder extends Seeder
 
         // Create Permissions
             // categories for boards
-        Permission::create(['name'=>'see categories','guard_name'=>'api']);
-        Permission::create(['name'=>'create categories','guard_name'=>'api']);
-        Permission::create(['name'=>'updateAll categories','guard_name'=>'api']);
-        Permission::create(['name'=>'update categories','guard_name'=>'api']);
-        Permission::create(['name'=>'delete categories','guard_name'=>'api']);
+        Permission::create(['name'=>'see categories']);
+        Permission::create(['name'=>'create categories']);
+        Permission::create(['name'=>'updateAll categories']);
+        Permission::create(['name'=>'update categories']);
+        Permission::create(['name'=>'delete categories']);
             // permissions for boards
-        Permission::create(['name'=>'see boards','guard_name'=>'api']);
-        Permission::create(['name'=>'create boards','guard_name'=>'api']);
-        Permission::create(['name'=>'updateAll boards','guard_name'=>'api']);
-        Permission::create(['name'=>'update boards','guard_name'=>'api']);
-        Permission::create(['name'=>'delete boards','guard_name'=>'api']);
+        Permission::create(['name'=>'see boards']);
+        Permission::create(['name'=>'create boards']);
+        Permission::create(['name'=>'updateAll boards']);
+        Permission::create(['name'=>'update boards']);
+        Permission::create(['name'=>'delete boards']);
             // permissions for columns
-        Permission::create(['name'=>'see columns','guard_name'=>'api']);
-        Permission::create(['name'=>'create columns','guard_name'=>'api']);
-        Permission::create(['name'=>'updateAll columns','guard_name'=>'api']);
-        Permission::create(['name'=>'update columns','guard_name'=>'api']);
-        Permission::create(['name'=>'delete columns','guard_name'=>'api']);
+        Permission::create(['name'=>'see columns']);
+        Permission::create(['name'=>'create columns']);
+        Permission::create(['name'=>'updateAll columns']);
+        Permission::create(['name'=>'update columns']);
+        Permission::create(['name'=>'delete columns']);
             // permissions for cards
-        Permission::create(['name'=>'see cards','guard_name'=>'api']);
-        Permission::create(['name'=>'create cards','guard_name'=>'api']);
-        Permission::create(['name'=>'updateAll cards','guard_name'=>'api']);
-        Permission::create(['name'=>'update cards','guard_name'=>'api']);
-        Permission::create(['name'=>'delete cards','guard_name'=>'api']);
+        Permission::create(['name'=>'see cards']);
+        Permission::create(['name'=>'create cards']);
+        Permission::create(['name'=>'updateAll cards']);
+        Permission::create(['name'=>'update cards']);
+        Permission::create(['name'=>'delete cards']);
             // permissions for tasks
-        Permission::create(['name'=>'see tasks','guard_name'=>'api']);
-        Permission::create(['name'=>'create tasks','guard_name'=>'api']);
-        Permission::create(['name'=>'updateAll tasks','guard_name'=>'api']);
-        Permission::create(['name'=>'update tasks','guard_name'=>'api']);
-        Permission::create(['name'=>'delete tasks','guard_name'=>'api']);
+        Permission::create(['name'=>'see tasks']);
+        Permission::create(['name'=>'create tasks']);
+        Permission::create(['name'=>'updateAll tasks']);
+        Permission::create(['name'=>'update tasks']);
+        Permission::create(['name'=>'delete tasks']);
 
         // create roles and assign to created permissions
             //Super admin role
-        $role1=Role::create(['name'=>'super-admin','guard_name'=>'api']);
+        $role1=Role::create(['name'=>'super-admin']);
             //trial role 
-        $role2=Role::create(['name'=>'trial','guard_name'=>'api'])
+        $role2=Role::create(['name'=>'trial'])
             ->givePermissionTo(Permission::all());
             //standart role
-        $role3=Role::create(['name'=>'standart','guard_name'=>'api'])
+        $role3=Role::create(['name'=>'standart'])
             ->givePermissionTo(Permission::all());
             //timeout role
-        $role4=Role::create(['name'=>'timeout','guard_name'=>'api'])
+        $role4=Role::create(['name'=>'timeout'])
             ->givePermissionTo(
                 [
                    'see categories',
