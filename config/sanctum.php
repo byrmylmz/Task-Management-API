@@ -15,7 +15,7 @@ return [
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
-        '*.alakod.com,api.alakod.com,sanctum.alakod.com,alakod.com,localhost,localhost:3000,localhost:8080,localhost:8000,127.0.0.1,127.0.0.1:8080,127.0.0.1:8000,::1',
+        'localhost,localhost:3000,alakod.com',
         env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
     ))),
 
