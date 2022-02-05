@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'stateful' => 'api.alakod.com',
+    'stateful' => explode('','api.alakod.com,sanctum.alakod.com'),
 
     /*
     |--------------------------------------------------------------------------
