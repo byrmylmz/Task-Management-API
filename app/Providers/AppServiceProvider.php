@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
       
 
         
-        JsonResource::withoutWrapping();
+        //JsonResource::withoutWrapping();
        
     }
 }

@@ -61,7 +61,9 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    // 'home' => RouteServiceProvider::HOME,
+    'home' => 'http://localhost:8080/dashboard',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -74,7 +76,7 @@ return [
     |
     */
 
-    'prefix' => '',
+    'prefix' => 'api',
 
     'domain' => null,
 

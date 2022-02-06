@@ -105,4 +105,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Board::class);
     }
+    /**
+     * Messeage and idadmin for the package of laravel vue spa
+     */
+    public function messages()
+    {
+      return $this->hasMany(Message::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
 }
