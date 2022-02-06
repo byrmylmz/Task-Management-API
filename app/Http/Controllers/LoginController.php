@@ -27,16 +27,12 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        $googleUser = Socialite::driver('google')->stateless()->user();
+        $googleUser = Socialite::driver('google')->user();
 
 
         $user = User::where('provider_id', $googleUser->id)->first();
 
-        $email=User::where('email',$googleUser->email)->first();
-
-        // if($email){
-        //     return response('This user is already registered. Please use forgot password.');
-        // }
+      
 
         if ($user) {
             $user->update([
@@ -53,19 +49,10 @@ class LoginController extends Controller
             ]);
         }
 
-        // delete all token first
-        // actually I can revoke old token first.
-        $user->tokens()->delete();
-        // find role first then assign this solution i found.
-        $roleToAssign = Role::findByName('trial', 'api');
-        $user->assignRole($roleToAssign);
+        Auth::login($user);
 
-        $token = $user->createToken('google')->accessToken;
-        //return the token for usage
-        return response()->json([
-            'success' => true,
-            'token' => $token
-        ]);
+        return redirect('https://sanctum.alakod.com/dashboard');
+
 
             
     }
