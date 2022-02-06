@@ -115,13 +115,7 @@ Route::fallback(function(){
         
     });
     
-    /**
-     |-----------------------------------------------
-     |  GOOGLE LOGIN AND REGISTER.
-     |-----------------------------------------------
-     */
-    Route::get('/auth/redirect',[LoginController::class,'redirectToProvider']);
-    Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
+
     
     /**
      |----------------------------------

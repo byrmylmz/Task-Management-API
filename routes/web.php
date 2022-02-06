@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+    /**
+     |-----------------------------------------------
+     |  GOOGLE LOGIN AND REGISTER.
+     |-----------------------------------------------
+     */
+    Route::get('/auth/redirect',[LoginController::class,'redirectToProvider']);
+    Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
