@@ -53,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *  The accessorts to append to the Model's array form
      *  free_trial_days_left
      */
-    protected $appends = ['free_trial_days_left','is_admin'];
+    protected $appends = ['free_trial_days_left','is_admin_first'];
 
     /**
      * The attributes that should be cast.
@@ -104,12 +104,18 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Messeage and idadmin for the package of laravel vue spa
      */
-    public function getIsAdminAttribute()
+    public function getIsAdminFirstAttribute()
     {
-        if($this->getRoleNames() === 'super-admin'){
-            return true;
+        foreach ($this->getRoleNames() as $key => $role) {
+            
+            if($role === 'super-admin'){
+                return $this->attribute = true;
+            }else{
+                return $this->attribute = false;
+            }
         }
-        return false;
+        
+       
     }
     
     public function messages()
@@ -119,6 +125,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin(): bool
     {
-       return $this->is_admin;
+       return $this->is_admin_first;
     }
 }
