@@ -118,7 +118,8 @@ jobs:
           script: |
             cd $RELEASE_PATH && ls -t -1 | tail -n +6 | xargs rm -rf
             cd $ARTIFACTS_PATH && ls -t -1 | tail -n +6 | xargs rm -rf
-            cd $CURRENT_PATH && php artisan optimize:clear
+            cd $CURRENT_PATH && php artisan config:cache
+            cd $CURRENT_PATH && php artisan view:cache
 
 
 
