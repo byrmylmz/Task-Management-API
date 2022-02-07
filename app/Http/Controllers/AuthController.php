@@ -10,29 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {   
-
-   public function __construct()
-   {
-    // $this->middleware('permission:see boards')->only('index');
-    // $this->middleware('permission:create boards')->only('store');
-    // $this->middleware('permission:updateAll boards')->only('updateAll');
-    // $this->middleware('permission:update boards')->only('update');
-    // $this->middleware('permission:delete boards')->only('destroy');
-   } 
-
-   public function index()
-   {
-       return UserResource::collection(User::paginate(10));
-   }
-
-   public function show(User $user)
-   {
-       return new UserResource($user);
-   }
-
-   public function users()
-   {
-       return new UserResource(Auth::user());
-   }
+        public function __invoke()
+        {
+            return new UserResource(Auth::user());
+        }
 
 }

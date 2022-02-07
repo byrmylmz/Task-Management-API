@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Passport\Passport;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 
 
@@ -30,7 +30,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         
-     
+        ResetPassword::createUrlUsing(function ($user, string $token) {
+            return env('SPA_URL') . '/reset-password?token=' . $token;
+        });
+        
         /**
          * Implicitly grant Super Admin role all permissions.
          * This works in the app by using gate-related function 

@@ -11,11 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Paddle\Billable;
 use Spatie\Permission\Traits\HasRoles;
 
-
-
-
-
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
     use Billable;
@@ -57,7 +53,7 @@ class User extends Authenticatable
      *  The accessorts to append to the Model's array form
      *  free_trial_days_left
      */
-    protected $appends = ['free_trial_days_left'];
+    protected $appends = ['free_trial_days_left','is_admin'];
 
     /**
      * The attributes that should be cast.
@@ -89,7 +85,7 @@ class User extends Authenticatable
 
         return $this->attributes = array(now()->diffInDays($this->trial_until,false));
     }
-    
+
     /**
      * Get todo item for the user
      */
@@ -108,6 +104,14 @@ class User extends Authenticatable
     /**
      * Messeage and idadmin for the package of laravel vue spa
      */
+    public function getIsAdminAttribute()
+    {
+        if($this->getRoleNames() === 'super-admin'){
+            return true;
+        }
+        return false;
+    }
+    
     public function messages()
     {
       return $this->hasMany(Message::class);
@@ -115,6 +119,6 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->is_admin;
+       return $this->is_admin;
     }
 }

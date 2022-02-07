@@ -76,7 +76,6 @@ class RolesAndPermissionSeeder extends Seeder
         $user=User::factory()->create(
             [
                 'name'=>'Bayram Yilmaz',
-                'is_admin'=>true,
                 'email'=>'bayramyilmaz061@gmail.com',
                 'trial_until' => NULL,
                 'password'=>Hash::make('12345678'),
@@ -86,7 +85,6 @@ class RolesAndPermissionSeeder extends Seeder
         $user=User::factory()->create(
             [
                 'name'=>'Bayram Keles',
-                'is_admin'=>true,
                 'email'=>'bayramkeles061@gmail.com',
                 'trial_until' => NULL,
                 'password'=>Hash::make('12345678'),

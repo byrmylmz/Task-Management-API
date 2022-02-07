@@ -62,7 +62,7 @@ return [
     */
 
     // 'home' => RouteServiceProvider::HOME,
-    'home' => 'http://localhost:8080/dashboard',
+    'home' => env('SPA_URL') . '/dashboard',
 
 
     /*
@@ -76,7 +76,7 @@ return [
     |
     */
 
-    'prefix' => 'api',
+    'prefix' => '',
 
     'domain' => null,
 
@@ -136,7 +136,7 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
-        // Features::emailVerification(),
+        Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([

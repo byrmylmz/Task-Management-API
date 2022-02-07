@@ -27,6 +27,9 @@ use Laravel\Socialite\Facades\Socialite;
 
 
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,28 +40,12 @@ use Laravel\Socialite\Facades\Socialite;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::fallback(function(){
-    return response()->json([
-        'message' => 'Page Not Found. If error persists, contact bayramyilmaz061@gmail.com'], 404);
-    });
-    
-    
-    Route::get('/test',function(){
-        // $messages = Message::all();
-        // return  MessageResource::collection($messages);
-        if (Auth::user()->isAdmin()) {
-            return UserResource::collection(User::withoutGlobalScope(UserIdScope::class)->get());
 
-        }
-        return  response()->json(["message" => "Forbidden"], 403);
-    })->middleware('auth:sanctum');
-
-    
+ 
     Route::middleware(['auth:sanctum','trial'])->group(function(){
         
-        
         /* Sanctum authentication */
-        Route::get('/users/auth',[AuthController::class,'users']);
+        Route::get('/users/auth',AuthController::class);
         Route::get('/users/{user}',[UserController::class,'show']);
         Route::get('/users',[UserController::class,'index']);
 
