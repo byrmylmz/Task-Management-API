@@ -52,7 +52,7 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        return url(env('SPA_URL') . '/dashboard');
+        return redirect('https://sanctum.alakod.com/dashboard');
 
 
             

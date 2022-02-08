@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = 'http://localhost:8080/dashboard';
+    public const HOME = 'https://sanctum.alakod.com/dashboard';
 
     /**
      * The controller namespace for the application.
