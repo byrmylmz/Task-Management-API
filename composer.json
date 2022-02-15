@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "fakerphp/faker": "^1.9.1",
         "fruitcake/laravel-cors": "^2.0",
+        "google/apiclient": "^2.12",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/cashier-paddle": "^1.4",
         "laravel/fortify": "^1.10",

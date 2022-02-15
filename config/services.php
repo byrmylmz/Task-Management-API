@@ -42,4 +42,18 @@ return [
         'redirect' => 'https://api.alakod.com/auth/callback'
       ],
 
+      'google-api' => [
+        'client_id' => '289279522444-rol3v9jke2i6qmflmjfa8s9iuvprt3ol.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect_uri' => env('GOOGLE_REDIRECT_URI'),
+        'webhook_uri' => env('GOOGLE_WEBHOOK_URI'),
+        'scopes' => [
+            \Google_Service_Oauth2::USERINFO_EMAIL,
+            \Google_Service_Calendar::CALENDAR,
+        ],
+        'approval_prompt' => 'force',
+        'access_type' => 'offline',
+        'include_granted_scopes' => true,
+    ],
+
 ];
