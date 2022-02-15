@@ -50,7 +50,9 @@ class GoogleAccountController extends Controller
             ]
         );
 
-        return url('https://sanctum.alakod.com/google-account');
+        return redirect('https://sanctum.alakod.com/dashboard');
+        
+
     }
 
     /**
