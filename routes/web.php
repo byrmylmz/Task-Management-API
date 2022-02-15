@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleAccountController;
+
 
 /*
 |--------------------------------------------------------------------------
