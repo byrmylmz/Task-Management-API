@@ -53,7 +53,7 @@ class GoogleAccountController extends Controller
                 'token' => $google->getAccessToken(),
             ]
         );
-        return url('https://sanctum.alakod.com/google-account');
+                return response('tamamlandir');
     }
 
     /**
