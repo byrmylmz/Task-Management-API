@@ -25,3 +25,7 @@ Route::get('/', function () {
      */
     Route::get('/auth/redirect',[LoginController::class,'redirectToProvider']);
     Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
+
+    Route::get('/google/oauth', [GoogleAccountController::class,'store']);
+    Route::get('/google', [GoogleAccountController::class,'index']);
+    Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);

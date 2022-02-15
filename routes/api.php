@@ -40,15 +40,13 @@ use Laravel\Socialite\Facades\Socialite;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/  
-  
-    Route::get('/google/oauth', [GoogleAccountController::class,'store'])->middleware("auth:sanctum");
-    
-    Route::middleware(['auth:sanctum','trial'])->group(function(){
 
-        /** google apis */
-        Route::get('/google', [GoogleAccountController::class,'index']);
-        Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);
+*/  
+
+Route::middleware(['auth:sanctum','trial'])->group(function(){
+    
+    /** google apis */
+      
 
         /* Sanctum authentication */
         Route::get('/users/auth',AuthController::class);

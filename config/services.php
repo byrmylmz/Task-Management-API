@@ -45,8 +45,8 @@ return [
       'google' => [
         'client_id' => '289279522444-rol3v9jke2i6qmflmjfa8s9iuvprt3ol.apps.googleusercontent.com',
         'client_secret' => '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',
-        'redirect_uri' => 'https://api.alakod.com/api/google/oauth',
-        'webhook_uri' => 'https://api.alakod.com/api/google/webhook',
+        'redirect_uri' => 'https://api.alakod.com/google/oauth',
+        'webhook_uri' => 'https://api.alakod.com/google/webhook',
         'scopes' => [
             \Google_Service_Oauth2::USERINFO_EMAIL,
             \Google_Service_Calendar::CALENDAR,
