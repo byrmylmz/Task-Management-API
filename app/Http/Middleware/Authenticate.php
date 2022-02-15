@@ -14,8 +14,8 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        // if (! $request->expectsJson()) {
-        //     return url('https://sanctum.alakod.com/login');
-        // }
+        if (! $request->expectsJson()) {
+            return url('https://sanctum.alakod.com/login');
+        }
     }
 }

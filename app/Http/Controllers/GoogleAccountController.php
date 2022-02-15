@@ -40,7 +40,12 @@ class GoogleAccountController extends Controller
         $account = $google->service('Oauth2');
         $userInfo = $account->userinfo->get();
 
-        Auth::user()->googleAccounts()->updateOrCreate(
+        //$infoArray=json_encode($userInfo);
+        /**///return $userInfo->email;
+        //return $infoArray->email;
+        //print_r($userInfo);
+
+        auth()->user()->googleAccounts()->updateOrCreate(
             [
                 'google_id' => $userInfo->id,
             ],
@@ -49,6 +54,8 @@ class GoogleAccountController extends Controller
                 'token' => $google->getAccessToken(),
             ]
         );
+
+        
     }
 
     /**

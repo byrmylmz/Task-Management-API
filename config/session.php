@@ -157,6 +157,7 @@ return [
 
     //'domain' => env('SESSION_DOMAIN'),
      'domain' => '.alakod.com',
+     //'domain' => 'localhost',
     /*
     |--------------------------------------------------------------------------
     | HTTPS Only Cookies
