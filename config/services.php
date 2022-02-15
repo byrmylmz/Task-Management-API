@@ -42,7 +42,7 @@ return [
         'redirect' => 'https://api.alakod.com/auth/callback'
       ],
 
-      'google-api' => [
+      'googleApi' => [
         'client_id' => '289279522444-rol3v9jke2i6qmflmjfa8s9iuvprt3ol.apps.googleusercontent.com',
         'client_secret' => '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',
         'redirect_uri' => 'https://api.alakod.com/api/google/oauth',

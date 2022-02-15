@@ -9,13 +9,13 @@ class Google
     function __construct()
     {
         $client = new \Google_Client();
-        $client->setClientId(config('services.google-api.client_id'));
-        $client->setClientSecret(config('services.google-api.client_secret'));
-        $client->setRedirectUri(config('services.google-api.redirect_uri'));
-        $client->setScopes(config('services.google-api.scopes'));
-        $client->setApprovalPrompt(config('services.google-api.approval_prompt'));
-        $client->setAccessType(config('services.google-api.access_type'));
-        $client->setIncludeGrantedScopes(config('services.google-api.include_granted_scopes'));
+        $client->setClientId(config('services.googleApi.client_id'));
+        $client->setClientSecret(config('services.googleApi.client_secret'));
+        $client->setRedirectUri(config('services.googleApi.redirect_uri'));
+        $client->setScopes(config('services.googleApi.scopes'));
+        $client->setApprovalPrompt(config('services.googleApi.approval_prompt'));
+        $client->setAccessType(config('services.googleApi.access_type'));
+        $client->setIncludeGrantedScopes(config('services.googleApi.include_granted_scopes'));
         $this->client = $client;
     }
     public function connectUsing($token)
