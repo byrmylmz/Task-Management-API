@@ -35,7 +35,10 @@ class GoogleAccountController extends Controller
         }
        
         $google->authenticate($request->get('code'));
-
+        if($google){
+            return response('google worked');
+        }else{
+        
         $account = $google->service('Oauth2');
         $userInfo = $account->userinfo->get();
 
@@ -53,7 +56,8 @@ class GoogleAccountController extends Controller
                 'token' => $google->getAccessToken(),
             ]
         );
-                return response('tamamlandir');
+
+        }
     }
 
     /**
