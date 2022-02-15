@@ -6,6 +6,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\GoogleAccountController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PassportController;
 use App\Http\Controllers\TaskController;
@@ -45,10 +46,10 @@ use Laravel\Socialite\Facades\Socialite;
     Route::middleware(['auth:sanctum','trial'])->group(function(){
 
         /** google apis */
-        Route::get('google', 'GoogleAccountController@index');
-        Route::get('google/oauth', 'GoogleAccountController@store');
-        Route::delete('google/{googleAccount}', 'GoogleAccountController@destroy');
-        
+        Route::get('google', [GoogleAccountController::class,'index']);
+        Route::get('google/oauth', [GoogleAccountController::class,'store']);
+        Route::delete('google/{googleAccount}', [GoogleAccountController::class,'destroy']);
+
         /* Sanctum authentication */
         Route::get('/users/auth',AuthController::class);
         Route::get('/users/{user}',[UserController::class,'show']);
