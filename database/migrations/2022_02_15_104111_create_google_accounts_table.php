@@ -19,10 +19,9 @@ class CreateGoogleAccountsTable extends Migration
             // Relationships.
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
-
             // Data.
             $table->string('google_id');
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->json('token');
 
             // Timestamps.
