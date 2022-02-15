@@ -44,9 +44,7 @@ use Laravel\Socialite\Facades\Socialite;
 */  
 
 Route::middleware(['auth:sanctum','trial'])->group(function(){
-    
-    /** google apis */
-      
+
 
         /* Sanctum authentication */
         Route::get('/users/auth',AuthController::class);

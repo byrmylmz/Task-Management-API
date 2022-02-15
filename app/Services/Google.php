@@ -9,13 +9,13 @@ class Google
     function __construct()
     {
         $client = new \Google_Client();
-        $client->setClientId(config('services.google.client_id'));
-        $client->setClientSecret(config('services.google.client_secret'));
-        $client->setRedirectUri(config('services.google.redirect_uri'));
-        $client->setScopes(config('services.google.scopes'));
-        $client->setApprovalPrompt(config('services.google.approval_prompt'));
-        $client->setAccessType(config('services.google.access_type'));
-        $client->setIncludeGrantedScopes(config('services.google.include_granted_scopes'));
+        $client->setClientId(config('services.googleApi.client_id'));
+        $client->setClientSecret(config('services.googleApi.client_secret'));
+        $client->setRedirectUri(config('services.googleApi.redirect_uri'));
+        $client->setScopes(config('services.googleApi.scopes'));
+        $client->setApprovalPrompt(config('services.googleApi.approval_prompt'));
+        $client->setAccessType(config('services.googleApi.access_type'));
+        $client->setIncludeGrantedScopes(config('services.googleApi.include_granted_scopes'));
         $this->client = $client;
     }
     

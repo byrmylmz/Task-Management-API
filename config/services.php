@@ -36,13 +36,13 @@ return [
         'client_secret' => env('PASSPORT_CLIENT_SECRET'),
     ],
     
-    // 'google' => [    
-    //     'client_id' => '19503759575-80rbkahqo8bnrcpq7cnd6m9p559m4l2u.apps.googleusercontent.com',  
-    //     'client_secret' => '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',  
-    //     'redirect' => 'https://api.alakod.com/auth/callback'
-    //   ],
+    'google' => [    
+        'client_id' => '19503759575-80rbkahqo8bnrcpq7cnd6m9p559m4l2u.apps.googleusercontent.com',  
+        'client_secret' => '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',  
+        'redirect' => 'https://api.alakod.com/auth/callback'
+      ],
 
-      'google' => [
+      'googleApi' => [
         'client_id' => '289279522444-rol3v9jke2i6qmflmjfa8s9iuvprt3ol.apps.googleusercontent.com',
         'client_secret' => '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',
         'redirect_uri' => 'https://api.alakod.com/google/oauth',
