@@ -49,7 +49,7 @@ class GoogleAccountController extends Controller
             ]
         );
 
-        return redirect('home');
+        return redirect('https://sanctum.alakod.com/google-account');
     }
 
     /**
