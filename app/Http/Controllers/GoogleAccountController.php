@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GoogleAccount;
+use App\Services\Google;
 use Illuminate\Http\Request;
 
 class GoogleAccountController extends Controller
@@ -28,7 +30,26 @@ class GoogleAccountController extends Controller
      */
     public function store(Request $request, Google $google)
     {
-        // TODO
+        if (! $request->has('code')) {
+            return redirect($google->createAuthUrl());
+        }
+
+        $google->authenticate($request->get('code'));
+
+
+        $account = $google->service('Oauth2')->userinfo->get();
+
+        auth()->user()->googleAccounts()->updateOrCreate(
+            [
+                'google_id' => $account->id,
+            ],
+            [
+                'name' => head($account->emails)->value,
+                'token' => $google->getAccessToken(),
+            ]
+        );
+
+        return redirect('/');
     }
 
     /**
