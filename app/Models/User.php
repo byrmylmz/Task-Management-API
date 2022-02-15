@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\GoogleAccount;
 use App\Scopes\UserIdScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -114,10 +115,10 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         }
         return false;
-        
-       
     }
-    
+    /**
+     * test for laravel vue admin panel 
+     */
     public function messages()
     {
       return $this->hasMany(Message::class);
@@ -126,5 +127,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdmin(): bool
     {
        return $this->is_admin_first;
+    }
+    /**
+     * Google account table
+     */
+    public function googleAccounts()
+    {
+        return $this->hasMany(GoogleAccount::class);
     }
 }
