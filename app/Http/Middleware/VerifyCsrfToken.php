@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'paddle/*',
+        'http://localhost:3000/login'
        
     ];
 }
