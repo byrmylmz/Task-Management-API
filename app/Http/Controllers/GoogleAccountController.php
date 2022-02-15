@@ -37,22 +37,19 @@ class GoogleAccountController extends Controller
         $google->authenticate($request->get('code'));
 
 
-        $account = $google->service('Oauth2');
-        $userInfo = $account->userinfo->get();
+        $account = $google->service('Oauth2')->userinfo->get();
 
         auth()->user()->googleAccounts()->updateOrCreate(
             [
-                'google_id' => $userInfo->id,
+                'google_id' => $account->id,
             ],
             [
-                'name' => $userInfo->email,
+                'name' => head($account->emails)->value,
                 'token' => $google->getAccessToken(),
             ]
         );
 
-        return redirect('home');
-        
-       // return response('saved',200);
+        return url('https://sanctum.alakod.com/google-account');
     }
 
     /**
