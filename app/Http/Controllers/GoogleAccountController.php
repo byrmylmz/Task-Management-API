@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GoogleAccount;
 use App\Services\Google;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GoogleAccountController extends Controller
 {
@@ -35,19 +36,11 @@ class GoogleAccountController extends Controller
         }
        
         $google->authenticate($request->get('code'));
-        if($google){
-            return response('google worked');
-        }else{
-        
+
         $account = $google->service('Oauth2');
         $userInfo = $account->userinfo->get();
 
-        //$infoArray=json_encode($userInfo);
-        /**///return $userInfo->email;
-        //return $infoArray->email;
-        //print_r($userInfo);
-
-        auth()->user()->googleAccounts()->updateOrCreate(
+        Auth::user()->googleAccounts()->updateOrCreate(
             [
                 'google_id' => $userInfo->id,
             ],
@@ -56,8 +49,6 @@ class GoogleAccountController extends Controller
                 'token' => $google->getAccessToken(),
             ]
         );
-
-        }
     }
 
     /**
