@@ -42,12 +42,12 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */  
   
+    Route::get('/google/oauth', [GoogleAccountController::class,'store'])->middleware('auth:sanctum');
     
     Route::middleware(['auth:sanctum','trial'])->group(function(){
 
         /** google apis */
         Route::get('/google', [GoogleAccountController::class,'index']);
-        Route::get('/google/oauth', [GoogleAccountController::class,'store']);
         Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);
 
         /* Sanctum authentication */

@@ -55,7 +55,7 @@ class GoogleAccountController extends Controller
             ]
         );
 
-        
+        return response('kaldi');
     }
 
     /**
