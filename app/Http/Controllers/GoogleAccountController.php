@@ -19,9 +19,9 @@ class GoogleAccountController extends Controller
     public function index()
     {
        
-            $googleAccounts= auth()->user()->googleAccounts;
-            return response($googleAccounts);
-       
+        $googleAccounts= auth()->user()->googleAccounts;
+        return response($googleAccounts);
+
     }
 
     /**
@@ -37,19 +37,20 @@ class GoogleAccountController extends Controller
         $google->authenticate($request->get('code'));
 
 
-        $account = $google->service('Oauth2')->userinfo->get();
+        $account = $google->service('Oauth2');
+        $userInfo = $account->userinfo->get();
 
         auth()->user()->googleAccounts()->updateOrCreate(
             [
-                'google_id' => $account->id,
+                'google_id' => $userInfo->id,
             ],
             [
-                'name' => head($account->emails)->value,
+                'name' => $userInfo->email,
                 'token' => $google->getAccessToken(),
             ]
         );
 
-        return redirect('/');
+        return url('https://sanctum.alakod.com/google-account');
     }
 
     /**
