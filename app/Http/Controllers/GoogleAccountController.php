@@ -50,9 +50,9 @@ class GoogleAccountController extends Controller
             ]
         );
 
-        //return redirect('https://sanctum.alakod.com/dashboard');
+        return redirect('home');
         
-        return response('saved',200);
+       // return response('saved',200);
     }
 
     /**
