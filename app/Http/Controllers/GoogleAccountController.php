@@ -45,7 +45,7 @@ class GoogleAccountController extends Controller
         //return $infoArray->email;
         //print_r($userInfo);
 
-        auth()->user()->googleAccounts()->updateOrCreate(
+        Auth::user()->googleAccounts()->updateOrCreate(
             [
                 'google_id' => $userInfo->id,
             ],
@@ -55,7 +55,7 @@ class GoogleAccountController extends Controller
             ]
         );
 
-        return response('kaldi');
+        return url('https://google.com');
     }
 
     /**

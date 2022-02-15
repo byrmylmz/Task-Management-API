@@ -42,7 +42,7 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */  
   
-    Route::get('/google/oauth', [GoogleAccountController::class,'store']);
+    Route::get('/google/oauth', [GoogleAccountController::class,'store'])->middleware("auth:sanctum");
     
     Route::middleware(['auth:sanctum','trial'])->group(function(){
 
