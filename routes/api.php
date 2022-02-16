@@ -44,7 +44,7 @@ use Laravel\Socialite\Facades\Socialite;
 */  
 
 Route::middleware(['auth:sanctum','trial'])->group(function(){
-
+        // google accounts
         Route::get('/gaccounts', [GoogleAccountController::class,'index']);
         Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);
 

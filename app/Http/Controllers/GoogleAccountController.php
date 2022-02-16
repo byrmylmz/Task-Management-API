@@ -56,8 +56,15 @@ class GoogleAccountController extends Controller
     /**
      * Revoke the account's token and delete the it locally.
      */
-    public function destroy(GoogleAccount $googleAccount)
+    public function destroy(GoogleAccount $googleAccount, Google $google)
     {
-        // TODO
+        $googleAccount->delete();
+
+        // Event though it has been deleted from our database,
+        // we still have access to $googleAccount as an object in memory.
+        $google->revokeToken($googleAccount->token);
+
+        return response('Deleted Succesfully',200);
+
     }
 }

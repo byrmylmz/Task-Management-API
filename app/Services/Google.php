@@ -25,6 +25,13 @@ class Google
 
         return $this;
     }
+    
+    public function revokeToken($token = null)
+    {
+        $token = $token ?? $this->client->getAccessToken();
+
+        return $this->client->revokeToken($token);
+    }
 
     public function service($service)
     {
