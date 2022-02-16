@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\GoogleAccountResource;
 use App\Models\GoogleAccount;
 use App\Services\Google;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class GoogleAccountController extends Controller
     {
        
         $googleAccounts= auth()->user()->googleAccounts;
-        return response($googleAccounts);
+        return GoogleAccountResource::collection($googleAccounts);
 
     }
 
