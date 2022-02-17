@@ -22,6 +22,7 @@ class Google
         $this->client = $client;
     }
     
+ 
     public function connectUsing($token)
     {
         $this->client->setAccessToken($token);
@@ -32,7 +33,7 @@ class Google
     public function connectWithSynchronizable($synchronizable)
     {
         $token = $this->getTokenFromSynchronizable($synchronizable);
-
+        
         return $this->connectUsing($token);
     }
 
@@ -44,12 +45,12 @@ class Google
 
             case $synchronizable instanceof Calendar:
                 return $synchronizable->googleAccount->token;
-
+            
             default:
                 throw new \Exception("Invalid Synchronizable");
         }
     }
-    
+
     public function revokeToken($token = null)
     {
         $token = $token ?? $this->client->getAccessToken();
