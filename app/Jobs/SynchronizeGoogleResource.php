@@ -2,17 +2,8 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-
 abstract class SynchronizeGoogleResource
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     protected $synchronizable;
     protected $synchronization;
 
@@ -22,11 +13,6 @@ abstract class SynchronizeGoogleResource
         $this->synchronization = $synchronizable->synchronization;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         $pageToken = null;
@@ -63,5 +49,4 @@ abstract class SynchronizeGoogleResource
     abstract public function getGoogleRequest($service, $options);
     abstract public function syncItem($item);
     abstract public function dropAllSyncedItems();
-
 }

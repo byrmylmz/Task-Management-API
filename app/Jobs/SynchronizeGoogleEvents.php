@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Jobs\SynchronizeGoogleResource;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -35,7 +34,7 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
                 'google_id' => $googleEvent->id,
             ],
             [
-                'name' => $googleEvent->summary,
+                'name' => $googleEvent->summary ?? '(No title)',
                 'description' => $googleEvent->description,
                 'allday' => $this->isAllDayEvent($googleEvent), 
                 'started_at' => $this->parseDatetime($googleEvent->start), 
@@ -43,6 +42,7 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
             ]
         );
     }
+
     public function dropAllSyncedItems()    
     {   
         $this->synchronizable->events()->delete();  
