@@ -3,7 +3,7 @@
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAccountController;
-
+use App\Http\Controllers\GoogleWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +29,6 @@ Route::get('/', function () {
     Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
 
     Route::get('/google/oauth', [GoogleAccountController::class,'store']);
+    Route::post('google/webhook', GoogleWebhookController::class);
+
 
