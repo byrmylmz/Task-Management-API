@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new PeriodicSynchronizations())->everyMinute();
+        $schedule->job(new PeriodicSynchronizations())->everyFifteenMinutes();
+        $schedule->job(new RefreshWebhookSynchronizations())->daily();
     }
 
     /**

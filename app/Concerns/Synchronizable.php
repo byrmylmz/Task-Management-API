@@ -24,7 +24,7 @@ trait Synchronizable
     {
         return $this->morphOne(Synchronization::class, 'synchronizable');
     }
-    
+
     public function getGoogleService($service)
     {
         return app(Google::class)
@@ -33,4 +33,5 @@ trait Synchronizable
     }
 
     abstract public function synchronize();
+    abstract public function watch();
 }

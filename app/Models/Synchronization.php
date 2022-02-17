@@ -26,6 +26,46 @@ class Synchronization extends Model
         return $this->synchronizable->synchronize();
     }
 
+    public function startListeningForChanges()
+    {
+        return $this->synchronizable->watch();
+    }
+
+    public function stopListeningForChanges()
+    {
+        if (! $this->resource_id) {
+            return;
+        }
+
+        $this->synchronizable
+            ->getGoogleService('Calendar')
+            ->channels->stop($this->asGoogleChannel());
+    }
+
+    public function refreshWebhook()
+    {
+        $this->stopListeningForChanges();
+
+        // Update the UUID since the previous one has 
+        // already been associated to a Google Channel.
+        $this->id = Uuid::uuid4();
+        $this->save();
+
+        $this->startListeningForChanges();
+
+        return $this;
+    }
+
+    public function asGoogleChannel()
+    {
+        return tap(new \Google_Service_Calendar_Channel(), function ($channel) {
+            $channel->setId($this->id);
+            $channel->setResourceId($this->resource_id);
+            $channel->setType('web_hook');
+            $channel->setAddress(config('services.google.webhook_uri'));
+        });
+    }
+
     // Create a polymorphic relationship to Google accounts and Calendars.
     public function synchronizable()
     {
@@ -37,15 +77,18 @@ class Synchronization extends Model
     {
         parent::boot();
 
-         // Before creating a new synchronization,
-        // ensure the UUID and the `last_synchronized_at` are set.
         static::creating(function ($synchronization) {
             $synchronization->id = Uuid::uuid4();
             $synchronization->last_synchronized_at = now();
         });
-         // Initial ping.
+
         static::created(function ($synchronization) {
+            $synchronization->startListeningForChanges();
             $synchronization->ping();
+        });
+
+        static::deleting(function ($synchronization) {
+            $synchronization->stopListeningForChanges();
         });
     }
 }

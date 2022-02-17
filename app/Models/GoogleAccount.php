@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Calendar;
 use App\Concerns\Synchronizable;
 use App\Jobs\SynchronizeGoogleCalendars;
+use App\Jobs\WatchGoogleCalendars;
 use App\Services\Google;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,10 +33,15 @@ class GoogleAccount extends Model
     {
         return $this->hasMany(Calendar::class);
     }
-    
+
     public function synchronize()
     {
         SynchronizeGoogleCalendars::dispatch($this);
+    }
+
+    public function watch()
+    {
+        WatchGoogleCalendars::dispatch($this);
     }
    
 }

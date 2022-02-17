@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\Synchronization;
+use App\Jobs\WatchGoogleResource;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class PeriodicSynchronizations implements ShouldQueue
+class WatchGoogleCalendars implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -29,8 +29,8 @@ class PeriodicSynchronizations implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
-    {   
-        Synchronization::whereNull('resource_id')->get()->each->ping();
+    public function getGoogleRequest($service, $channel)
+    {
+        return $service->calendarList->watch($channel);
     }
 }
