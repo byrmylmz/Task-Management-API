@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use App\Models\Calendar;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    use HasFactory;
     protected $with = ['calendar'];
 
     protected $fillable = [
@@ -34,5 +32,4 @@ class Event extends Model
     {
         return $this->started_at->diffForHumans($this->ended_at, true);
     }
-
 }

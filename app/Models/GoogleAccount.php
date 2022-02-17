@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
+
 use App\Models\Calendar;
 use App\Concerns\Synchronizable;
 use App\Jobs\SynchronizeGoogleCalendars;
 use App\Jobs\WatchGoogleCalendars;
-use App\Services\Google;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class GoogleAccount extends Model
 {
-    use HasFactory;
     use Synchronizable;
 
     protected $fillable = [
@@ -43,5 +42,4 @@ class GoogleAccount extends Model
     {
         WatchGoogleCalendars::dispatch($this);
     }
-   
 }

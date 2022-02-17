@@ -7,12 +7,10 @@ use App\Models\Event;
 use App\Models\GoogleAccount;
 use App\Jobs\SynchronizeGoogleEvents;
 use App\Jobs\WatchGoogleEvents;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Calendar extends Model
 {
-    use HasFactory;
     use Synchronizable;
 
     protected $fillable = [
@@ -38,6 +36,4 @@ class Calendar extends Model
     {
         WatchGoogleEvents::dispatch($this);
     }
-
-    
 }
