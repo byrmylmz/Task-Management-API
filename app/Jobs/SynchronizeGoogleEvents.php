@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Jobs\SynchronizeGoogleResource;
-use App\Services\Google;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,13 +14,6 @@ use Illuminate\Support\Carbon;
 class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    public function getGoogleService()
-    {
-        return app(Google::class)
-            ->connectUsing($this->synchronizable->googleAccount->token)
-            ->service('Calendar');
-    }
 
     public function getGoogleRequest($service, $options)
     {
