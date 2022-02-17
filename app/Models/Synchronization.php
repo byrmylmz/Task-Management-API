@@ -60,7 +60,7 @@ class Synchronization extends Model
             $channel->setId($this->id);
             $channel->setResourceId($this->resource_id);
             $channel->setType('web_hook');
-            $channel->setAddress(config('services.google.webhook_uri'));
+            $channel->setAddress(config('services.googleApi.webhook_uri'));
         });
     }
 
