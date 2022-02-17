@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Event;
 use App\Models\GoogleAccount;
 use App\Scopes\UserIdScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
