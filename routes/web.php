@@ -29,6 +29,6 @@ Route::get('/', function () {
     Route::get('/auth/callback',[LoginController::class,'handleProviderCallback']);
 
     Route::get('/google/oauth', [GoogleAccountController::class,'store']);
-    Route::post('google/webhook', GoogleWebhookController::class);
+    Route::name('google.webhook')->post('/google/webhook', GoogleWebhookController::class);
 
 
