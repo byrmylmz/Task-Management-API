@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SynchronizeGoogleCalendars;
 use App\Models\Calendar;
 use App\Services\Google;
 use App\Models\User;

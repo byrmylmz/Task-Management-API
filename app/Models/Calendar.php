@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SynchronizeGoogleEvents;
 use App\Models\Event;
 use App\Models\GoogleAccount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
