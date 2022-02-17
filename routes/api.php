@@ -6,6 +6,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAccountController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PassportController;
@@ -47,6 +48,7 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         // google accounts
         Route::get('/gaccounts', [GoogleAccountController::class,'index']);
         Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);
+        Route::get('/events',[EventController::class,'index']);
 
         /* Sanctum authentication */
         Route::get('/users/auth',AuthController::class);

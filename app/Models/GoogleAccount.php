@@ -29,4 +29,13 @@ class GoogleAccount extends Model
     {
         return $this->hasMany(Calendar::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($googleAccount) {
+            SynchronizeGoogleCalendars::dispatch($googleAccount);
+        });
+    }
 }

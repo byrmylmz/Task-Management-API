@@ -24,4 +24,13 @@ class Calendar extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($calendar) {
+            SynchronizeGoogleEvents::dispatch($calendar);
+        });
+    }
 }
