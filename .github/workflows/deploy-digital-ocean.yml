@@ -121,7 +121,6 @@ jobs:
             cd $CURRENT_PATH && php artisan config:cache
             cd $CURRENT_PATH && php artisan view:cache
             cd $CURRENT_PATH && php artisan route:cache
-            cd $CURRENT_PATH && php artisan websocket:serve --host=127.0.0.1 --port=6002
 
 
 
