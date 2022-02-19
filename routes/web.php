@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAccountController;
 use App\Http\Controllers\GoogleWebhookController;
+use App\Events\Hello;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,9 @@ Route::get('/', function () {
 
     Route::get('/google/oauth', [GoogleAccountController::class,'store']);
     Route::post('/google/webhook', GoogleWebhookController::class);
+
+    Route::get('/broadcast',function(){
+        broadcast(new Hello());
+    });
 
 
