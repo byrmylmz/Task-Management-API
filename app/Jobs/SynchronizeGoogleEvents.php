@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
+use App\Events\Hello;
 
 class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements ShouldQueue
 {
@@ -29,7 +30,7 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
                 ->delete();
         }
 
-        $this->synchronizable->events()->updateOrCreate(
+        $updateOrCreate= $this->synchronizable->events()->updateOrCreate(
             [
                 'google_id' => $googleEvent->id,
             ],
@@ -41,6 +42,11 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
                 'ended_at' => $this->parseDatetime($googleEvent->end), 
             ]
         );
+        
+        if($updateOrCreate){
+            broadcast(new Hello());
+        }
+
     }
 
     public function dropAllSyncedItems()    
