@@ -59,6 +59,9 @@ class GoogleAccountController extends Controller
     public function destroy(GoogleAccount $googleAccount, Google $google)
     {
         $googleAccount->calendars->each->delete();
+        
+        $googleAccount->delete();
+
         // Event though it has been deleted from our database,
         // we still have access to $googleAccount as an object in memory.
         $google->revokeToken($googleAccount->token);
