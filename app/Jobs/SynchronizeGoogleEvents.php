@@ -28,11 +28,13 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
     public function syncItem($googleEvent)
     {
         if ($googleEvent->status === 'cancelled') {
-            $createdEvents='one item deleted';
-            CalendarEventCreated::dispatch($createdEvents);
-            return $this->synchronizable->events()
+            
+                $this->synchronizable->events()
                 ->where('google_id', $googleEvent->id)
                 ->delete(); 
+
+            $createdEvents='one item deleted';
+            CalendarEventCreated::dispatch($createdEvents);
 
           
         }
