@@ -73,7 +73,7 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
             ]
         );
 
-        $createdEvents='bayram';
+        $createdEvents=$this->synchronizable->events();
 
        CalendarEventCreated::dispatch($createdEvents);
     }
