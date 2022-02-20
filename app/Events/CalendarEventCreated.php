@@ -14,16 +14,16 @@ class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $createdEvents='New Event Created';
+    public $createdEvents;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($createdEvents)
     {
-        //
+        $this->createdEvents=$createdEvents;
     }
 
     /**
