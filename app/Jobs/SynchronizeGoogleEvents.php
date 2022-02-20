@@ -31,9 +31,10 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
             return $this->synchronizable->events()
                 ->where('google_id', $googleEvent->id)
                 ->delete(); 
-        $createdEvents=$this->synchronizable->events()->get();
 
-        CalendarEventCreated::dispatch($createdEvents);
+            // update state.
+            $createdEvents='one item deleted';
+            CalendarEventCreated::dispatch($createdEvents);
           
         }
 
