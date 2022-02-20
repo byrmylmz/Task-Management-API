@@ -9,6 +9,8 @@ class Event extends Model
 {
     protected $with = ['calendar'];
 
+    protected $appends = ['duration'];
+
     protected $fillable = [
         'google_id', 'name', 'description', 'allday', 'started_at', 'ended_at',
     ];
