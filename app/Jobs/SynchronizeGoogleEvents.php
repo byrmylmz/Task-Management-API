@@ -29,42 +29,14 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
     {
         if ($googleEvent->status === 'cancelled') {
 
+            // DISPATCH EVENT FOR STATE.
             $createdEvents='one item deleted';
             CalendarEventCreated::dispatch($createdEvents);
-            
+
             return $this->synchronizable->events()
                 ->where('google_id', $googleEvent->id)
                 ->delete(); 
-
-          
         }
-
-        // $event=$this->synchronizable->events()->where('google_id',$googleEvent->id)->first();
-        
-        // if($event !== null){
-        //     $event->update([
-
-        //         'name' => $googleEvent->summary ?? '(No title)',
-        //         'description' => $googleEvent->description,
-        //         'allday' => $this->isAllDayEvent($googleEvent), 
-        //         'started_at' => $this->parseDatetime($googleEvent->start), 
-        //         'ended_at' => $this->parseDatetime($googleEvent->end), 
-
-        //     ]);
-        //         CalendarEventUpdated::dispatch();
-        // }else{
-        //     $this->synchronizable->events()->create([
-
-        //         'google_id' => $googleEvent->id,
-        //         'name' => $googleEvent->summary ?? '(No title)',
-        //         'description' => $googleEvent->description,
-        //         'allday' => $this->isAllDayEvent($googleEvent), 
-        //         'started_at' => $this->parseDatetime($googleEvent->start), 
-        //         'ended_at' => $this->parseDatetime($googleEvent->end), 
-                
-        //     ]);
-        //         CalendarEventCreated::dispatch();
-        // }
 
          $this->synchronizable->events()->updateOrCreate(
             [
@@ -78,10 +50,9 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
                 'ended_at' => $this->parseDatetime($googleEvent->end), 
             ]
         );
-
+        // DISPATCH FOR NEW CREATED EVENT.
         $createdEvents=$this->synchronizable->events()->get();
-
-       CalendarEventCreated::dispatch($createdEvents);
+        CalendarEventCreated::dispatch($createdEvents);
     }
 
     public function dropAllSyncedItems()    
