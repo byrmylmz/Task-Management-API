@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarEventCreated implements ShouldBroadcast
 {
@@ -34,6 +35,6 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastOn()
     {
         //return new PrivateChannel('channel-name');
-        return new PrivateChannel('created-events.'.auth()->user->id);
+        return new PrivateChannel('created-events.'.Auth::user()->id);
     }
 }
