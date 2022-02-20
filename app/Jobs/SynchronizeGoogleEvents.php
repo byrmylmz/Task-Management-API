@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Events\CalendarEventCreated;
+use App\Events\CalendarEventUpdated;
 use App\Jobs\SynchronizeGoogleResource;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,6 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 use App\Events\Hello;
+use App\Models\Event;
 
 class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements ShouldQueue
 {
@@ -30,23 +33,45 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
                 ->delete(); 
         }
 
-        $updateOrCreate= $this->synchronizable->events()->updateOrCreate(
-            [
-                'google_id' => $googleEvent->id,
-            ],
-            [
+        $event=$this->synchronizable->events()->where('google_id',$googleEvent->id)->first();
+        
+        if($event !== null){
+            $event->update([
+
                 'name' => $googleEvent->summary ?? '(No title)',
                 'description' => $googleEvent->description,
                 'allday' => $this->isAllDayEvent($googleEvent), 
                 'started_at' => $this->parseDatetime($googleEvent->start), 
                 'ended_at' => $this->parseDatetime($googleEvent->end), 
-            ]
-        );
-        
-        if($updateOrCreate){
-            broadcast(new Hello());
+
+            ]);
+                CalendarEventUpdated::dispatch();
+        }else{
+            $this->synchronizable->events()->create([
+
+                'google_id' => $googleEvent->id,
+                'name' => $googleEvent->summary ?? '(No title)',
+                'description' => $googleEvent->description,
+                'allday' => $this->isAllDayEvent($googleEvent), 
+                'started_at' => $this->parseDatetime($googleEvent->start), 
+                'ended_at' => $this->parseDatetime($googleEvent->end), 
+                
+            ]);
+                CalendarEventCreated::dispatch();
         }
 
+        //  $this->synchronizable->events()->updateOrCreate(
+        //     [
+        //         'google_id' => $googleEvent->id,
+        //     ],
+        //     [
+        //         'name' => $googleEvent->summary ?? '(No title)',
+        //         'description' => $googleEvent->description,
+        //         'allday' => $this->isAllDayEvent($googleEvent), 
+        //         'started_at' => $this->parseDatetime($googleEvent->start), 
+        //         'ended_at' => $this->parseDatetime($googleEvent->end), 
+        //     ]
+        // );
     }
 
     public function dropAllSyncedItems()    

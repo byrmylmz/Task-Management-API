@@ -10,11 +10,11 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CalendarEventCreated implements ShouldBroadcast
+class CalendarEventUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $createdEvents='New Event Created';
+    public $updatedEvents = 'Event Updated';
 
     /**
      * Create a new event instance.
@@ -33,7 +33,6 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        //return new PrivateChannel('channel-name');
-        return new Channel('created-events');
+        return new Channel('updated-events');
     }
 }
