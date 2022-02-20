@@ -27,7 +27,7 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
         if ($googleEvent->status === 'cancelled') {
             return $this->synchronizable->events()
                 ->where('google_id', $googleEvent->id)
-                ->delete();
+                ->delete(); 
         }
 
         $updateOrCreate= $this->synchronizable->events()->updateOrCreate(

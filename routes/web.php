@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\CalendarEventCreated;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAccountController;
@@ -34,6 +35,7 @@ Route::get('/', function () {
 
     Route::get('/broadcast',function(){
         broadcast(new Hello());
+        CalendarEventCreated::dispatch();
     });
 
 
