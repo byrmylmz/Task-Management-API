@@ -72,8 +72,8 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
                 'ended_at' => $this->parseDatetime($googleEvent->end), 
             ]
         );
-        
-        CalendarEventCreated::dispatch($this->synchronizable->events());
+
+       // CalendarEventCreated::dispatch($this->synchronizable->events());
     }
 
     public function dropAllSyncedItems()    
