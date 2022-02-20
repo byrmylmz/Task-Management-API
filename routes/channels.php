@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('created-events.{google_account_id}', function ($user, $google_account_id) {
+    return (int) $user->googleAccounts->id === (int) $google_account_id;
 });
