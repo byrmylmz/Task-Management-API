@@ -28,11 +28,9 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
     public function syncItem($googleEvent)
     {
         if ($googleEvent->status === 'cancelled') {
-
             // DISPATCH EVENT FOR STATE.
             // $createdEvents='deneme';
             // CalendarEventCreated::dispatch($createdEvents);
-
             return $this->synchronizable->events()
                 ->where('google_id', $googleEvent->id)
                 ->delete(); 
@@ -51,8 +49,8 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
             ]
         );
         // DISPATCH FOR NEW CREATED EVENT.
-        $calendarId=$this->synchronizable->events()->get();
-        CalendarEventCreated::dispatch($calendarId);
+        // $calendarId=$this->synchronizable->events()->get();
+        // CalendarEventCreated::dispatch($calendarId);
     }
 
     public function dropAllSyncedItems()    

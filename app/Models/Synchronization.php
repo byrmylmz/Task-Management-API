@@ -24,6 +24,7 @@ class Synchronization extends Model
     {  
         $calendarId=$this->synchronizable_id;
         CalendarEventCreated::dispatch($calendarId);
+        
         return $this->synchronizable->synchronize();
     }
 

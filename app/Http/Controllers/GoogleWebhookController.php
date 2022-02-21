@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CalendarEventCreated;
 use App\Models\Synchronization;
 use Illuminate\Http\Request;
 
@@ -19,7 +18,5 @@ class GoogleWebhookController extends Controller
             ->where('resource_id', $request->header('x-goog-resource-id'))
             ->firstOrFail()
             ->ping();
-
-           
     }
 }
