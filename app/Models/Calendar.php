@@ -31,8 +31,6 @@ class Calendar extends Model
     public function synchronize()
     {
         
-      
-        
         SynchronizeGoogleEvents::dispatch($this);
         
     }
