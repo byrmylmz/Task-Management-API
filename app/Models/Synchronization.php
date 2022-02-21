@@ -20,8 +20,7 @@ class Synchronization extends Model
     ];
     
     public function ping()
-    {   $createdEvents='ping';
-        CalendarEventCreated::dispatch($createdEvents);
+    {  
         return $this->synchronizable->synchronize();
     }
 
