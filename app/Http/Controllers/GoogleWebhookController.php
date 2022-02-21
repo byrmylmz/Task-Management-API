@@ -13,10 +13,15 @@ class GoogleWebhookController extends Controller
             return;
         }
 
-        Synchronization::query()
+       $sync= Synchronization::query()
             ->where('id', $request->header('x-goog-channel-id'))
             ->where('resource_id', $request->header('x-goog-resource-id'))
             ->firstOrFail()
             ->ping();
+
+            if ($sync){
+                $createdEvents='periodic snyronziaton';
+                CalendarEventCreated::dispatch($createdEvents);
+            }
     }
 }
