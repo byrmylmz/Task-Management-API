@@ -30,8 +30,8 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
         if ($googleEvent->status === 'cancelled') {
 
             // DISPATCH EVENT FOR STATE.
-            $createdEvents='deneme';
-            CalendarEventCreated::dispatch($createdEvents);
+            // $createdEvents='deneme';
+            // CalendarEventCreated::dispatch($createdEvents);
 
             return $this->synchronizable->events()
                 ->where('google_id', $googleEvent->id)

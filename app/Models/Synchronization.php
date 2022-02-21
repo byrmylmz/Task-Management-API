@@ -22,8 +22,8 @@ class Synchronization extends Model
     
     public function ping()  
     {  
-        $createdEvents=$this->resource_id;
-        CalendarEventCreated::dispatch($createdEvents);
+        $calendarId=$this->synchronizable_id;
+        CalendarEventCreated::dispatch($calendarId);
         return $this->synchronizable->synchronize();
     }
 
