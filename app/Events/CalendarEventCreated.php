@@ -16,7 +16,7 @@ class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $calendarId='8';
+    public $foo='bar';
 
     /**
      * Create a new event instance.
