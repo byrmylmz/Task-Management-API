@@ -20,7 +20,6 @@ Broadcast::channel('created-events.1', function () {
     // $google_accounts=$user->googleAccounts;
     // $account=$calendar->google_account_id;
     // return Arr::exists($google_accounts,$account);
-});
+},['guards' => ['web', 'auth']]);
     
-
 
