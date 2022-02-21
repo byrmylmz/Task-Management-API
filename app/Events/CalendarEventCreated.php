@@ -27,16 +27,6 @@ class CalendarEventCreated implements ShouldBroadcast
         //$this->calendarId=$calendarId;
     }
 
-    /**
-     * Get the data to broadcast.
-     *
-     * @return array
-     */
-    public function broadcastWith()
-    {
-        // return ['syncronization' =>auth()->user()->googleAccounts()->pluck('id')];
-        //return ['syncronization' => 'completed'];
-    }
 
     /**
      * Get the channels the event should broadcast on.
