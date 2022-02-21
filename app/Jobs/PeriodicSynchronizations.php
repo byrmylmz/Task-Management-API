@@ -16,11 +16,11 @@ class PeriodicSynchronizations implements ShouldQueue
 
     public function handle()
     {   
-        Synchronization::whereNull('resource_id')->get()->each->ping();
-      
+        $sync=Synchronization::whereNull('resource_id')->get()->each->ping();
+        if ($sync){
             $createdEvents='periodic snyronziaton';
             CalendarEventCreated::dispatch($createdEvents);
-        
+        }
       
     }
 }
