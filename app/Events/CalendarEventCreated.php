@@ -35,6 +35,6 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastOn()
     {
         //return new PrivateChannel('channel-name');
-        return new PrivateChannel('created-events.'.Auth::user()->id);
+        return new PrivateChannel('created-events.4');
     }
 }
