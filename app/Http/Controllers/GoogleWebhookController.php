@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CalendarEventCreated;
 use App\Models\Synchronization;
 use Illuminate\Http\Request;
 
