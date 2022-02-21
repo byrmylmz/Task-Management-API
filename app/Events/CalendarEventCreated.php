@@ -34,7 +34,7 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return ['id' => 'hello'];
+        return ['id' => $this->user->id];
     }
 
     /**
