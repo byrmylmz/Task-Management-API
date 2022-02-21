@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Events\CalendarEventCreated;
+use Illuminate\Support\Str;
+
 
 abstract class SynchronizeGoogleResource
 {
@@ -50,7 +52,7 @@ abstract class SynchronizeGoogleResource
         
         $synchronizable_type = $this->synchronization->synchronizable_type;
         $slice = Str::afterLast($synchronizable_type, '\\');
-        if($slice ==='Calendar')
+        if($slice === 'Calendar')
         {
             $calendarId = $this->synchronization->synchronizable_id;
             CalendarEventCreated::dispatch($calendarId);
