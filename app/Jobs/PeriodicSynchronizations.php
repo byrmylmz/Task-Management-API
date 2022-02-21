@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\CalendarEventCreated;
 use App\Models\Synchronization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,6 +17,10 @@ class PeriodicSynchronizations implements ShouldQueue
     public function handle()
     {   
         Synchronization::whereNull('resource_id')->get()->each->ping();
+      
+            $createdEvents='periodic snyronziaton';
+            CalendarEventCreated::dispatch($createdEvents);
+        
       
     }
 }
