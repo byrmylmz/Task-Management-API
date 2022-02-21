@@ -2,13 +2,16 @@
 
 namespace App\Concerns;
 
+use App\Events\CalendarEventCreated;
 use App\Services\Google;
 use App\Models\Synchronization;
 
 trait Synchronizable
 {
     public static function bootSynchronizable()
-    {
+    {   
+        $calendarId='ping';
+        CalendarEventCreated::dispatch($calendarId);
         // Start a new synchronization once created.
         static::created(function ($synchronizable) {
             $synchronizable->synchronization()->create();
@@ -31,6 +34,7 @@ trait Synchronizable
             ->connectWithSynchronizable($this)
             ->service($service);
     }
+    
 
     abstract public function synchronize();
     abstract public function watch();

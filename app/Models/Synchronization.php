@@ -67,8 +67,6 @@ class Synchronization extends Model
 
     public function synchronizable()
     {   
-        $calendarId=$this->synchronizable_id;
-        CalendarEventCreated::dispatch($calendarId);
 
         return $this->morphTo();
     }
