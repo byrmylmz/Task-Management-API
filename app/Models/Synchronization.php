@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CalendarEventCreated;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
@@ -19,8 +20,10 @@ class Synchronization extends Model
         'expired_at' => 'datetime',
     ];
     
-    public function ping()
+    public function ping()  
     {  
+        $createdEvents='ping';
+        CalendarEventCreated::dispatch($createdEvents);
         return $this->synchronizable->synchronize();
     }
 
@@ -86,5 +89,7 @@ class Synchronization extends Model
         static::deleting(function ($synchronization) {
             $synchronization->stopListeningForChanges();
         });
+
+
     }
 }
