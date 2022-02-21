@@ -10,11 +10,11 @@ trait Synchronizable
 {
     public static function bootSynchronizable()
     {   
-        $calendarId='ping';
-        CalendarEventCreated::dispatch($calendarId);
         // Start a new synchronization once created.
         static::created(function ($synchronizable) {
             $synchronizable->synchronization()->create();
+            $calendarId='ping';
+            CalendarEventCreated::dispatch($calendarId);
         });
 
         // Stop and delete associated synchronization.
