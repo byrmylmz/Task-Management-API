@@ -45,6 +45,6 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastOn()
     {
         //return new PrivateChannel('channel-name');
-        return new Channel('created-events.4');
+        return new PrivateChannel('created-events.'.$this->calendarId);
     }
 }

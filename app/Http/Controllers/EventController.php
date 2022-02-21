@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EventCollection;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,6 @@ class EventController extends Controller
     {
         $events=auth()->user()->events()->orderBy('started_at','desc')->get();
 
-        return EventResource::collection($events);
+        return new EventCollection($events);
     }
 }
