@@ -16,5 +16,7 @@ class PeriodicSynchronizations implements ShouldQueue
     public function handle()
     {   
         Synchronization::whereNull('resource_id')->get()->each->ping();
+        $createdEvents='periodic snyronziaton';
+        CalendarEventCreated::dispatch($createdEvents);
     }
 }
