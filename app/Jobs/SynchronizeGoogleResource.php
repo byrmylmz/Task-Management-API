@@ -50,10 +50,9 @@ abstract class SynchronizeGoogleResource
             'last_synchronized_at' => now(),
         ]);
 
-        //CalendarEventCreated::dispatch();
+        CalendarEventCreated::dispatch();
         //event(new TaskCreated($task));
 
-        event(new CalendarEventCreated());
 
         
         // $synchronizable_type = $this->synchronization->synchronizable_type;

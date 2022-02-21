@@ -12,7 +12,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 
-class CalendarEventCreated implements ShouldBroadcastNow
+class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -23,9 +23,9 @@ class CalendarEventCreated implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($calendarId)
     {
-        //$this->calendarId=$calendarId;
+        $this->calendarId=$calendarId;
     }
 
 
