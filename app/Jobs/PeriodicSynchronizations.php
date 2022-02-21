@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Events\CalendarEventCreated;
 use App\Models\Synchronization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
