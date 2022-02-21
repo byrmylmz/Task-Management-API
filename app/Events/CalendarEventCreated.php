@@ -26,6 +26,11 @@ class CalendarEventCreated implements ShouldBroadcast
     public function __construct()
     {
     }
+    //dfdfdfdf
+        public function broadcastAs()
+    {
+        return 'CalendarEventCreated';
+    }
 
 
     /**
