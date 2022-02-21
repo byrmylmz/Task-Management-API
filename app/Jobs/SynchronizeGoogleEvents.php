@@ -54,8 +54,8 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
     }
 
     public function stateUpdate(){
-        $calendarId='ping';
-        CalendarEventCreated::dispatch($calendarId);
+      
+        CalendarEventCreated::dispatch();
     }
 
     public function dropAllSyncedItems()    
