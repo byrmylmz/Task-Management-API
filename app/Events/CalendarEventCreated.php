@@ -22,7 +22,7 @@ class CalendarEventCreated implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($calendarId)
     {
         $this->calendarId=$calendarId;
     }
