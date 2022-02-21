@@ -54,8 +54,9 @@ abstract class SynchronizeGoogleResource
         $slice = Str::afterLast($synchronizable_type, '\\');
         if($slice === 'Calendar')
         {
-            $calendarId = $this->synchronization->synchronizable_id;
-            CalendarEventCreated::dispatch($calendarId);
+           // $calendarId = $this->synchronization->synchronizable_id;
+            CalendarEventCreated::dispatch();
+            // CalendarEventCreated::dispatch($calendarId);
         }
 
     }

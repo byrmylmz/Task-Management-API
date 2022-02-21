@@ -15,16 +15,16 @@ class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $calendarId;
+    // public $calendarId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($calendarId)
+    public function __construct()
     {
-        $this->calendarId=$calendarId;
+        //$this->calendarId=$calendarId;
     }
 
     /**
@@ -34,7 +34,7 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-       // return ['syncronization' => 'completed'];
+        return ['syncronization' =>auth()->user()->googleAccounts()->pluck('id')];
     }
 
     /**
@@ -45,6 +45,7 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastOn()
     {
         //return new PrivateChannel('channel-name');
-        return new PrivateChannel('created-events.'.$this->calendarId);
+        return new PrivateChannel('created-events.4');
+        // return new PrivateChannel('created-events.'.$this->calendarId);
     }
 }
