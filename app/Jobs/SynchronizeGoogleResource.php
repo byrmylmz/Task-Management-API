@@ -50,14 +50,14 @@ abstract class SynchronizeGoogleResource
             'last_synchronized_at' => now(),
         ]);
         
-        $synchronizable_type = $this->synchronization->synchronizable_type;
-        $slice = Str::afterLast($synchronizable_type, '\\');
-        if($slice === 'Calendar')
-        {
-           // $calendarId = $this->synchronization->synchronizable_id;
-            CalendarEventCreated::dispatch();
-            // CalendarEventCreated::dispatch($calendarId);
-        }
+        CalendarEventCreated::dispatch();
+        // $synchronizable_type = $this->synchronization->synchronizable_type;
+        // $slice = Str::afterLast($synchronizable_type, '\\');
+        // if($slice === 'Calendar')
+        // {
+        //    $calendarId = $this->synchronization->synchronizable_id;
+        //     CalendarEventCreated::dispatch($calendarId);
+        // }
 
     }
 
