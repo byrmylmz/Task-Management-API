@@ -51,6 +51,7 @@ abstract class SynchronizeGoogleResource
         ]);
         
         CalendarEventCreated::dispatch();
+        
         // $synchronizable_type = $this->synchronization->synchronizable_type;
         // $slice = Str::afterLast($synchronizable_type, '\\');
         // if($slice === 'Calendar')
