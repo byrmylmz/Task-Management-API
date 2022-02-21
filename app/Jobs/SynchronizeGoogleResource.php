@@ -19,6 +19,7 @@ abstract class SynchronizeGoogleResource
     {
         $pageToken = null;
         $syncToken = $this->synchronization->token;
+     
         $service = $this->synchronizable->getGoogleService('Calendar');
 
         do {
@@ -47,7 +48,8 @@ abstract class SynchronizeGoogleResource
             'last_synchronized_at' => now(),
         ]);
 
-        CalendarEventCreated::dispatch();
+        $calendarId = $this->synchronization->synchronizable_id;
+        CalendarEventCreated::dispatch($calendarId);
 
     }
 

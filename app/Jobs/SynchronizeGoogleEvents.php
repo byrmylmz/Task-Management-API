@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Events\CalendarEventCreated;
-use App\Events\CalendarEventUpdated;
 use App\Jobs\SynchronizeGoogleResource;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,8 +10,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
-use App\Events\Hello;
-use App\Models\Event;
 
 class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements ShouldQueue
 {

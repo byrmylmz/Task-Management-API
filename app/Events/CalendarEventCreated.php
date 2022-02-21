@@ -15,7 +15,7 @@ class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    //public $calendarId;
+    public $calendarId;
 
     /**
      * Create a new event instance.
@@ -24,7 +24,7 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function __construct()
     {
-        //$this->calendarId=$calendarId;
+        $this->calendarId=$calendarId;
     }
 
     /**
@@ -34,7 +34,7 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return ['syncronization' => 'completed'];
+       // return ['syncronization' => 'completed'];
     }
 
     /**
