@@ -15,16 +15,16 @@ class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $createdEvents;
+    public $calendarId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($createdEvents)
+    public function __construct($calendarId)
     {
-        $this->createdEvents=$createdEvents;
+        $this->calendarId=$calendarId;
     }
 
     /**
@@ -35,6 +35,6 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastOn()
     {
         //return new PrivateChannel('channel-name');
-        return new Channel('created-events');
+        return new Channel('created-events.'.$this->calendarId);
     }
 }
