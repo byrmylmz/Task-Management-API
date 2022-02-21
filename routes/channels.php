@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Broadcast;
 */
 
 Broadcast::channel('created-events.{calendar}', function ($user, Calendar $calendar) {
-    $google_accounts=$user->googleAccounts;
-    $account=$calendar->google_account_id;
-    return Arr::exists($google_accounts,$account);
+    return true;
+    // $google_accounts=$user->googleAccounts;
+    // $account=$calendar->google_account_id;
+    // return Arr::exists($google_accounts,$account);
 });
     
 
