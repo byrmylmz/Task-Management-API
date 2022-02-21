@@ -16,7 +16,7 @@ class EventCollection extends ResourceCollection
     {
         return [
             'data'=> $this->collection,
-            'calendar'=>auth()->user()->googleAccounts()->pluck('id'),
+            'calendars'=>auth()->user()->googleAccounts()->pluck('id'),
         ];
     }
 }
