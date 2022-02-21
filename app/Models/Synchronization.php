@@ -22,9 +22,6 @@ class Synchronization extends Model
     
     public function ping()  
     {  
-        $calendarId=$this->synchronizable_id;
-        CalendarEventCreated::dispatch($calendarId);
-        
         return $this->synchronizable->synchronize();
     }
 
@@ -69,7 +66,10 @@ class Synchronization extends Model
     }
 
     public function synchronizable()
-    {
+    {   
+        $calendarId=$this->synchronizable_id;
+        CalendarEventCreated::dispatch($calendarId);
+
         return $this->morphTo();
     }
 
