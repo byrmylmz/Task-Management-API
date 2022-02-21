@@ -47,7 +47,7 @@ abstract class SynchronizeGoogleResource
             'last_synchronized_at' => now(),
         ]);
 
-        $calendarId='ping';
+        $calendarId='syncronization-calendar';
         CalendarEventCreated::dispatch($calendarId);
     }
 

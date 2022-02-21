@@ -28,6 +28,16 @@ class CalendarEventCreated implements ShouldBroadcast
     }
 
     /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return ['id' => $this->user->id];
+    }
+
+    /**
      * Get the channels the event should broadcast on.
      *
      * @return \Illuminate\Broadcasting\Channel|array
