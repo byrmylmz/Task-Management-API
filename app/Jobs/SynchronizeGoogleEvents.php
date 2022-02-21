@@ -51,8 +51,8 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
             ]
         );
         // DISPATCH FOR NEW CREATED EVENT.
-        $createdEvents=$this->synchronizable->events()->get();
-        CalendarEventCreated::dispatch($createdEvents);
+        $calendarId=$this->synchronizable->events()->get();
+        CalendarEventCreated::dispatch($calendarId);
     }
 
     public function dropAllSyncedItems()    
