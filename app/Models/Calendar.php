@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Concerns\Synchronizable;
+use App\Events\CalendarEventCreated;
 use App\Models\Event;
 use App\Models\GoogleAccount;
 use App\Jobs\SynchronizeGoogleEvents;
@@ -30,6 +31,9 @@ class Calendar extends Model
     public function synchronize()
     {
         SynchronizeGoogleEvents::dispatch($this);
+        $calendarId='ping';
+        CalendarEventCreated::dispatch($calendarId);
+        
     }
 
     public function watch()

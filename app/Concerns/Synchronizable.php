@@ -2,7 +2,6 @@
 
 namespace App\Concerns;
 
-use App\Events\CalendarEventCreated;
 use App\Services\Google;
 use App\Models\Synchronization;
 
@@ -10,11 +9,10 @@ trait Synchronizable
 {
     public static function bootSynchronizable()
     {   
+
         // Start a new synchronization once created.
         static::created(function ($synchronizable) {
             $synchronizable->synchronization()->create();
-            $calendarId='ping';
-            CalendarEventCreated::dispatch($calendarId);
         });
 
         // Stop and delete associated synchronization.
