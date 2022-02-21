@@ -34,7 +34,8 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return ['syncronization' =>auth()->user()->googleAccounts()->pluck('id')];
+        // return ['syncronization' =>auth()->user()->googleAccounts()->pluck('id')];
+        return ['syncronization' =>'completed'];
     }
 
     /**
