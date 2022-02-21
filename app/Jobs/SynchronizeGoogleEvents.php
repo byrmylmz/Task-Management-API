@@ -53,6 +53,11 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
         // CalendarEventCreated::dispatch($calendarId);
     }
 
+    public function stateUpdate(){
+        $calendarId='ping';
+        CalendarEventCreated::dispatch($calendarId);
+    }
+
     public function dropAllSyncedItems()    
     {   
         $this->synchronizable->events()->delete();  

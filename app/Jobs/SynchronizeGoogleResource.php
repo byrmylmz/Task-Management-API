@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Events\CalendarEventCreated;
+
 abstract class SynchronizeGoogleResource
 {
     protected $synchronizable;
@@ -44,6 +46,9 @@ abstract class SynchronizeGoogleResource
             'token' => $list->getNextSyncToken(),
             'last_synchronized_at' => now(),
         ]);
+
+        $calendarId='ping';
+        CalendarEventCreated::dispatch($calendarId);
     }
 
     abstract public function getGoogleRequest($service, $options);

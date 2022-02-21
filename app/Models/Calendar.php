@@ -31,8 +31,8 @@ class Calendar extends Model
     public function synchronize()
     {
         
-        $calendarId='ping';
-        CalendarEventCreated::dispatch($calendarId);
+      
+        
         SynchronizeGoogleEvents::dispatch($this);
         
     }
