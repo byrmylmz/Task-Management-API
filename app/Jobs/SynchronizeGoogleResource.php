@@ -47,8 +47,8 @@ abstract class SynchronizeGoogleResource
             'last_synchronized_at' => now(),
         ]);
 
-        $calendarId='syncronization-calendar';
-        CalendarEventCreated::dispatch($calendarId);
+        CalendarEventCreated::dispatch();
+
     }
 
     abstract public function getGoogleRequest($service, $options);
