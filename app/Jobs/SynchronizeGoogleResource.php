@@ -49,8 +49,8 @@ abstract class SynchronizeGoogleResource
             'token' => $list->getNextSyncToken(),
             'last_synchronized_at' => now(),
         ]);
-        
-        CalendarEventCreated::dispatch();
+        $calendarId='ping';
+        CalendarEventCreated::dispatch($calendarId);
         
         // $synchronizable_type = $this->synchronization->synchronizable_type;
         // $slice = Str::afterLast($synchronizable_type, '\\');

@@ -15,7 +15,7 @@ class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    // public $calendarId;
+    public $calendarId;
 
     /**
      * Create a new event instance.
@@ -35,7 +35,7 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastWith()
     {
         // return ['syncronization' =>auth()->user()->googleAccounts()->pluck('id')];
-        return ['syncronization' => 'completed'];
+        //return ['syncronization' => 'completed'];
     }
 
     /**
