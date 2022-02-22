@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+Broadcast::channel('private-App.Models.User.{id}', function ($user, $id) {
     //Check User's Authorization to listen on the channel.
     return true;
 });
