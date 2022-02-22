@@ -16,7 +16,7 @@ class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $foo='bar';
+    public $payload = 'Hello World!';
 
     /**
      * Create a new event instance.
@@ -25,11 +25,13 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function __construct()
     {
+
     }
     //dfdfdfdf
+
         public function broadcastAs()
     {
-        return 'CalendarEventCreated';
+        return 'new-message-event';
     }
 
 
@@ -41,7 +43,7 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastOn()
     {
         //return new PrivateChannel('channel-name');
-        return new PrivateChannel('created-events.1');
+        return new PrivateChannel('App.User.4');
         // return new PrivateChannel('created-events.'.$this->calendarId);
     }
 }
