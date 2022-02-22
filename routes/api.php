@@ -43,6 +43,7 @@ use Laravel\Socialite\Facades\Socialite;
 |
 
 */  
+Broadcast::routes(['middleware'=>['auth:sanctum']]);
 
 Route::middleware(['auth:sanctum','trial'])->group(function(){
         // google accounts
