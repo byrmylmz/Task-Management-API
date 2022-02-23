@@ -12,29 +12,29 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 
-class CalendarEventCreated implements ShouldBroadcastNow
+class CalendarEventCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $payload = 'Hello World!';
+    public $calendarId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($calendarId)
     {
-
+       $this->calendarId = $calendarId;
     }
-    //dfdfdfdf
-
-        public function broadcastAs()
+    
+    public function broadcastWith()
     {
-        return 'new-message-event';
+        return [
+            'user_id' => Auth::User()->id,
+            'calendar_id' => $this->calendarId,
+        ];
     }
-
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -42,8 +42,6 @@ class CalendarEventCreated implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        //return new PrivateChannel('channel-name');
-        return new PrivateChannel('App.Models.User.4');
-        // return new PrivateChannel('created-events.'.$this->calendarId);
+        return new PrivateChannel('App.Models.User.'.Auth::User()->id);
     }
 }

@@ -33,9 +33,11 @@ Route::get('/', function () {
     Route::get('/google/oauth', [GoogleAccountController::class,'store']);
     Route::post('/google/webhook', GoogleWebhookController::class);
 
+
+
     Route::get('/broadcast',function(){
-        broadcast(new Hello());
-        CalendarEventCreated::dispatch();
+        $calendarId=9;
+         CalendarEventCreated::dispatch($calendarId);
     });
 
 
