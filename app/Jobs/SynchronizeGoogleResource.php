@@ -51,8 +51,7 @@ abstract class SynchronizeGoogleResource
         ]);
                 
      
-            $calendarId = $this->synchronization->synchronizable_id;
-            CalendarEventCreated::dispatch($calendarId);
+            CalendarEventCreated::dispatch();
         
 
     }
