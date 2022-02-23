@@ -31,7 +31,7 @@ class CalendarEventCreated implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-            'user_id' => Auth::User()->id,
+            //'user_id' => Auth::User()->id,
             'calendar_id' => $this->calendarId,
         ];
     }
@@ -42,6 +42,6 @@ class CalendarEventCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('App.Models.User.'.Auth::User()->id);
+        return new PrivateChannel('App.Models.User.4');
     }
 }

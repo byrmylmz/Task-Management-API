@@ -50,9 +50,12 @@ abstract class SynchronizeGoogleResource
             'last_synchronized_at' => now(),
         ]);
                 
-     
-            CalendarEventCreated::dispatch();
-        
+        $slice = Str::afterLast($this->synchronization->synchronizable_type, '\\');
+        if($slice === 'Calendar')
+        {
+            $calendarId = $this->synchronization->synchronizable_id;
+            CalendarEventCreated::dispatch($calendarId);
+        }
 
     }
 
