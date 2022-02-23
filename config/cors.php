@@ -28,6 +28,7 @@ return [
         'email/verification-notification',
         'broadcasting/auth',
         'laravel-websockets/api/',
+        
       ],
 
     'allowed_methods' => ['*'],
