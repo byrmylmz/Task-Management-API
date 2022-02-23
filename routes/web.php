@@ -5,7 +5,7 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAccountController;
 use App\Http\Controllers\GoogleWebhookController;
-use App\Events\Hello;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +39,16 @@ Route::get('/', function () {
         $calendarId=9;
          CalendarEventCreated::dispatch($calendarId);
     });
+
+    Route::get('/test',function(){
+        $synchronizable_type = 'App\Models\Calendar';
+        $slice = Str::afterLast($synchronizable_type, '\\');
+        if($slice === 'Calendar')
+        {
+            return response('ok');
+        }
+    });
+    
+   
 
 
