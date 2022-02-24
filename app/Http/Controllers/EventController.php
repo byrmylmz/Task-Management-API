@@ -16,7 +16,7 @@ class EventController extends Controller
 
         return new EventCollection($events);
     }
-
+    
     public function store(Request $request, Google $google)
     {
         $token= auth()->user()->googleAccounts()->first()->token;
@@ -27,7 +27,7 @@ class EventController extends Controller
         $calendarId = 'alakodcontact@gmail.com';
 
         $event = new \Google_Service_Calendar_Event(array(
-            'summary' => 'test',
+            'summary' => $request->summary,
             'start' => array(
               'dateTime' => '2022-02-24T09:00:00-02:00',
               'timeZone' => 'Europe/Istanbul',
