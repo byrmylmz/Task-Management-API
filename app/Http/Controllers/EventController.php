@@ -21,7 +21,7 @@ class EventController extends Controller
     {
         $token= auth()->user()->googleAccounts()->first()->token;
 
-        $service = $google->connectUsing($token)->service('calendar');
+        $service = $google->connectUsing($token)->service('Calendar');
         
         // Print the next 10 events on the user's calendar.
         $calendarId = 'alakodcontact@gmail.com';
