@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Events\CalendarEventCreated;
+use App\Events\CalendarSync;
 use App\Jobs\SynchronizeGoogleResource;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -46,7 +46,7 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
 
     public function stateUpdate(){
       
-        CalendarEventCreated::dispatch();
+        CalendarSync::dispatch();
     }
 
     public function dropAllSyncedItems()    

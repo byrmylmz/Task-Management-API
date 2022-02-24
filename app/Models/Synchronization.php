@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\CalendarEventCreated;
+use App\Events\CalendarSync;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 

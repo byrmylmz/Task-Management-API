@@ -1,10 +1,11 @@
 <?php
 
-use App\Events\CalendarEventCreated;
+use App\Events\CalendarSync;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAccountController;
 use App\Http\Controllers\GoogleWebhookController;
+use App\Models\Calendar;
 use Illuminate\Support\Str;
 
 /*
@@ -36,18 +37,11 @@ Route::get('/', function () {
 
 
     Route::get('/broadcast',function(){
-        $calendarId=9;
-         CalendarEventCreated::dispatch($calendarId);
+        $userId=4;
+        CalendarSync::dispatch($userId);
     });
 
-    Route::get('/test',function(){
-        $synchronizable_type = 'App\Models\Calendar';
-        $slice = Str::afterLast($synchronizable_type, '\\');
-        if($slice === 'Calendar')
-        {
-            return response('ok');
-        }
-    });
+ 
     
    
 

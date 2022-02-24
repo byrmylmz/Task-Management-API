@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Calendar;
+use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Broadcast;
 
@@ -15,9 +16,10 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    //Check User's Authorization to listen on the channel.
-    return true;
+Broadcast::channel('App.Models.User.{id}', function ($user,$id) {
+        
+        return (int) $user->id ===  (int) $id;
+
 });
     
 

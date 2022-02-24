@@ -7,30 +7,33 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
-class Hello implements ShouldBroadcast
+class CalendarSync implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $userId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($userId)
     {
-        //
+       $this->userId = $userId;
     }
-
+    
     public function broadcastWith()
     {
         return [
-            'hello'=>'hello'
+            'user_id' => $this->userId,
         ];
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -38,6 +41,6 @@ class Hello implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('channel');
+        return new PrivateChannel('App.Models.User.'.$this->userId);
     }
 }

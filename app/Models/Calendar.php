@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Concerns\Synchronizable;
-use App\Events\CalendarEventCreated;
+use App\Events\CalendarSync;
 use App\Models\Event;
 use App\Models\GoogleAccount;
+use App\Models\User;
 use App\Jobs\SynchronizeGoogleEvents;
 use App\Jobs\WatchGoogleEvents;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +27,11 @@ class Calendar extends Model
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOneThrough(User::class, GoogleAccount::class);
     }
 
     public function synchronize()
