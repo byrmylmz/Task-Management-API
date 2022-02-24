@@ -57,7 +57,7 @@ class EventController extends Controller
             );
         }
 
-        public function destroy(Request $request)
+        public function destroy(Request $request, Google $google)
         {
             $token= auth()->user()->googleAccounts()->first()->token;
         
@@ -66,6 +66,7 @@ class EventController extends Controller
             $service->events->get('primary', $request->google_id);
 
             $event = Event::where('google_id',$request->google_id);
+
             $event->delete();
 
         }
