@@ -31,7 +31,7 @@ class CalendarSync implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-            'user_id' => $this->userId,
+            'sync' => 'true',
         ];
     }
     /**
