@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         Route::get('/gaccounts', [GoogleAccountController::class,'index']);
         Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);
         Route::get('/events',[EventController::class,'index']);
+        Route::post('/events',[EventController::class,'store']);
 
         /* Sanctum authentication */
         Route::get('/users/auth',AuthController::class);
