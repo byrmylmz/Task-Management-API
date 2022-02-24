@@ -6,7 +6,7 @@ use App\Http\Resources\EventCollection;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
 use App\Services\Google;
-
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -27,13 +27,13 @@ class EventController extends Controller
         $calendarId = 'alakodcontact@gmail.com';
 
         $event = new \Google_Service_Calendar_Event(array(
-            'summary' => $request->summary,
+            'summary' => $request->name,
             'start' => array(
-              'dateTime' => '2022-02-24T09:00:00-02:00',
+              'dateTime' => Carbon::now(),
               'timeZone' => 'Europe/Istanbul',
             ),
             'end' => array(
-              'dateTime' => '2022-02-24T05:00:00-07:00',
+              'dateTime' => Carbon::now()->addHour(),
               'timeZone' => 'Europe/Istanbul',
             ),
           ));
@@ -47,11 +47,11 @@ class EventController extends Controller
               'google_id' => $results->id,
             ],
             [
-                'name' => $request->summary,
+                'name' => $request->name,
                 'description' => '',
               
-                'started_at' => Carbon::parse('2022-02-09T05:00:00-07:00')->setTimezone('UTC'), 
-                'ended_at' => Carbon::parse('2022-02-09T05:00:00-07:00')->setTimezone('UTC'), 
+                'started_at' => Carbon::now()->setTimeZone('UTC'), 
+                'ended_at' => Carbon::now()->addHour()->setTimeZone('UTC'), 
             ]
         );
     }
