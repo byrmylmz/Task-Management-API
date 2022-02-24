@@ -57,7 +57,7 @@ class EventController extends Controller
             );
         }
 
-        public function destroy(Request $request, Google $google)
+        public function destroy(Request $request, Google $google, $google_id)
         {      
             $calendarId = 'alakodcontact@gmail.com';
 
@@ -67,7 +67,7 @@ class EventController extends Controller
 
             $service->events->delete($calendarId, $request->google_id);
 
-            $event = Event::where('google_id',$request->google_id);
+            $event = Event::where('google_id',$google_id);
 
             $event->delete();
 
