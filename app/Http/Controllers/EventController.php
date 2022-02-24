@@ -63,7 +63,7 @@ class EventController extends Controller
         
             $service = $google->connectUsing($token)->service('Calendar');
 
-            $service->events->get('primary', $request->google_id);
+            $service->events->delete('primary', $request->google_id);
 
             $event = Event::where('google_id',$request->google_id);
 
