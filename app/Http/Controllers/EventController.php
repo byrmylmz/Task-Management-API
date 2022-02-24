@@ -58,12 +58,14 @@ class EventController extends Controller
         }
 
         public function destroy(Request $request, Google $google)
-        {
+        {      
+            $calendarId = 'alakodcontact@gmail.com';
+
             $token= auth()->user()->googleAccounts()->first()->token;
         
             $service = $google->connectUsing($token)->service('Calendar');
 
-            $service->events->delete('primary', $request->google_id);
+            $service->events->delete($calendarId, $request->google_id);
 
             $event = Event::where('google_id',$request->google_id);
 
