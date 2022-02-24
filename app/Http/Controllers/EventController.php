@@ -41,5 +41,18 @@ class EventController extends Controller
           
           $results = $service->events->insert($calendarId,$event);
           printf('Event created: %s\n', $results->id);
+
+          auth()->user()->googleAccounts()->first()->calendars()->first()->events()->updateOrCreate(
+            [
+              'google_id' => $results->id,
+            ],
+            [
+                'name' => $request->summary,
+                'description' => '',
+              
+                'started_at' => Carbon::parse('2022-02-09T05:00:00-07:00')->setTimezone('UTC'), 
+                'ended_at' => Carbon::parse('2022-02-09T05:00:00-07:00')->setTimezone('UTC'), 
+            ]
+        );
     }
 }
