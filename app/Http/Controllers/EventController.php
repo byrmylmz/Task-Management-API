@@ -57,8 +57,9 @@ class EventController extends Controller
             );
 
          return response([
+             'google_id'=>$results->id,
              'started_at'=>$results->start->dateTime,
-             'id'=>$results->id
+             'name'=>$results->summary,
          ]);
         }
 
