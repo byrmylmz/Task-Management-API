@@ -20,7 +20,7 @@ class EventController extends Controller
 
     public function getDurationAttribute($start,$end)
     {
-        return $start->diffForHumans($end, true);
+        return Carbon::parse($start)->diffForHumans(Carbon::parse($end), true);
     }
     
     public function store(Request $request, Google $google)
@@ -61,17 +61,14 @@ class EventController extends Controller
                 ]
             );
 
-
-        
          return response([
              'google_id'=>$results->id,
              'started_at'=>$results->start->dateTime,
              'name'=>$results->summary,
              'duration'=> $this->getDurationAttribute($results->start->dateTime,$results->end->dateTime),
          ]);
-        }
 
-      
+        }
 
         public function destroy(Request $request, Google $google, $google_id)
         {      
