@@ -55,7 +55,7 @@ class EventController extends Controller
                 ]
             );
 
-            return response($results);
+          return EventResource::collection($results);
         }
         
 
