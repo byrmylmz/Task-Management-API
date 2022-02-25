@@ -55,13 +55,20 @@ class EventController extends Controller
                 'ended_at' => Carbon::now()->addHour()->setTimeZone('UTC'), 
                 ]
             );
+
+
         
          return response([
              'google_id'=>$results->id,
              'started_at'=>$results->start->dateTime,
              'name'=>$results->summary,
-             'duration'=> $results->start->dateTime->diffForHumans($results->end->dateTime, true),
+             'duration'=> getDurationAttribute(),
          ]);
+        }
+
+        public function getDurationAttribute()
+        {
+            return $results->start->dateTime->diffForHumans($results->end->dateTime, true);
         }
 
         public function destroy(Request $request, Google $google, $google_id)
