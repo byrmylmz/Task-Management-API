@@ -18,10 +18,6 @@ class EventController extends Controller
         return new EventCollection($events);
     }
 
-    public function getDurationAttribute($start,$end)
-    {
-        return Carbon::parse($start)->diffForHumans(Carbon::parse($end), true);
-    }
     
     public function store(Request $request, Google $google)
     {
@@ -60,16 +56,21 @@ class EventController extends Controller
                 'ended_at' => Carbon::now()->addHour()->setTimeZone('UTC'), 
                 ]
             );
-
-         return response([
-             'google_id'=>$results->id,
-             'started_at'=>$results->start->dateTime,
-             'name'=>$results->summary,
-             'duration'=> $this->getDurationAttribute($results->start->dateTime,$results->end->dateTime),
-         ]);
-
+            
+            return response([
+                'google_id'=>$results->id,
+                'started_at'=>$results->start->dateTime,
+                'name'=>$results->summary,
+                'duration'=> $this->getDurationAttribute($results->start->dateTime,$results->end->dateTime),
+            ]);
+            
         }
-
+        
+        public function getDurationAttribute($start,$end)
+        {
+            return Carbon::parse($start)->diffForHumans(Carbon::parse($end), true);
+        }
+        
         public function destroy(Request $request, Google $google, $google_id)
         {      
             $event = Event::where('google_id',$google_id);
