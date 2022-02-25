@@ -60,7 +60,7 @@ class EventController extends Controller
              'google_id'=>$results->id,
              'started_at'=>$results->start->dateTime,
              'name'=>$results->summary,
-             'duration'=> $results->start->started_at->diffForHumans($results->start->ended_at, true),
+             'duration'=> $results->start->dateTime->diffForHumans($results->end->dateTime, true),
          ]);
         }
 
