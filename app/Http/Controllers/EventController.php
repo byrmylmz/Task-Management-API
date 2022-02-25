@@ -18,6 +18,11 @@ class EventController extends Controller
         return new EventCollection($events);
     }
     
+    public function getDurationAttribute($start,$end)
+    {
+        return $start->diffForHumans($end, true);
+    }
+    
     public function store(Request $request, Google $google)
     {
         $token= auth()->user()->googleAccounts()->first()->token;
@@ -62,14 +67,11 @@ class EventController extends Controller
              'google_id'=>$results->id,
              'started_at'=>$results->start->dateTime,
              'name'=>$results->summary,
-             'duration'=> getDurationAttribute(),
+             'duration'=> getDurationAttribute($results->start->dateTime,$results->end->dateTime),
          ]);
         }
 
-        public function getDurationAttribute()
-        {
-            return $results->start->dateTime->diffForHumans($results->end->dateTime, true);
-        }
+      
 
         public function destroy(Request $request, Google $google, $google_id)
         {      
