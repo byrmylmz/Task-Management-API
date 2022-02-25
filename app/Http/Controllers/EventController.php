@@ -17,7 +17,7 @@ class EventController extends Controller
 
         return new EventCollection($events);
     }
-    
+
     public function getDurationAttribute($start,$end)
     {
         return $start->diffForHumans($end, true);
@@ -67,7 +67,7 @@ class EventController extends Controller
              'google_id'=>$results->id,
              'started_at'=>$results->start->dateTime,
              'name'=>$results->summary,
-             'duration'=> getDurationAttribute($results->start->dateTime,$results->end->dateTime),
+             'duration'=> $this->getDurationAttribute($results->start->dateTime,$results->end->dateTime),
          ]);
         }
 
