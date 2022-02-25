@@ -41,8 +41,7 @@ class EventController extends Controller
         
         
         $results = $service->events->insert($calendarId,$event);
-        printf('Event created: %s\n', $results->start->dateTime);
-        
+
         auth()->user()->googleAccounts()->first()->calendars()->first()->events()->updateOrCreate(
             [
                 'google_id' => $results->id,
@@ -55,7 +54,10 @@ class EventController extends Controller
                 'ended_at' => Carbon::now()->addHour()->setTimeZone('UTC'), 
                 ]
             );
+
+            return response($results);
         }
+        
 
         public function destroy(Request $request, Google $google, $google_id)
         {      
