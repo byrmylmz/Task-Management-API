@@ -41,7 +41,7 @@ class EventController extends Controller
         
         
         $results = $service->events->insert($calendarId,$event);
-        printf('Event created: %s\n', $results->id);
+        printf('Event created: %s\n', $results->start->dateTime);
         
         auth()->user()->googleAccounts()->first()->calendars()->first()->events()->updateOrCreate(
             [
@@ -59,6 +59,10 @@ class EventController extends Controller
 
         public function destroy(Request $request, Google $google, $google_id)
         {      
+            $event = Event::where('google_id',$google_id);
+
+            $event->delete();
+
             $calendarId = 'alakodcontact@gmail.com';
 
             $token= auth()->user()->googleAccounts()->first()->token;
@@ -67,9 +71,27 @@ class EventController extends Controller
 
             $service->events->delete($calendarId, $google_id);
 
-            $event = Event::where('google_id',$google_id);
 
-            $event->delete();
+        }
+
+        public function update(Request $request,Google $google,$google_id)
+        {   
+            $data=Event::where('google_id',$google_id);
+            $data->update([
+                'name'=>$request->name
+            ]);
+
+            $token= auth()->user()->googleAccounts()->first()->token;
+        
+            $service = $google->connectUsing($token)->service('Calendar');
+
+            $calendarId = 'alakodcontact@gmail.com';
+
+            $event = $service->events->get($calendarId, $google_id);
+
+            $event->setSummary($request->name);
+
+            $service->events->update($calendarId, $event->getId(), $event);
 
         }
     }

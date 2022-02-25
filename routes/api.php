@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         Route::get('/events',[EventController::class,'index']);
         Route::post('/events',[EventController::class,'store']);
         Route::delete('/events/{id}',[EventController::class,'destroy']);
+        Route::patch('/events/{id}',[EventController::class,'update']);
 
         /* Sanctum authentication */
         Route::get('/users/auth',AuthController::class);
