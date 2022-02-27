@@ -16,8 +16,8 @@ class CardFactory extends Factory
      */
     public function definition()
     {
-        $user_array=User::pluck('id')->toArray();
         $column_array=Column::pluck('id')->toArray();
+        $user_array=Column::pluck('user_id')->toArray();
 
         return [
             'user_id'=>Arr::random($user_array),

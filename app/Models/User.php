@@ -95,6 +95,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Todo::class);
     }
+    /**
+     * Get todo item for the user
+     */
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 
     /**
      * Get the boards for the user

@@ -46,6 +46,7 @@ class BoardController extends Controller
     public function updateAll(Request $request)
     {
         $boards = Board::all();
+        
         foreach ($boards as $board){
             $board->timestamps = false;
             $id = $board->id;

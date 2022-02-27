@@ -17,7 +17,7 @@ class ColumnFactory extends Factory
     public function definition()
     {   
         $board_array=Board::pluck('id')->toArray();
-        $user_array=User::pluck('id')->toArray();
+        $user_array=Board::pluck('user_id')->toArray();
 
         return [
             'user_id'=>Arr::random($user_array),

@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Board;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Faker\Factory;
 
 class BoardSeeder extends Seeder
 {
@@ -13,7 +15,22 @@ class BoardSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        Board::factory()->count(100)->create();
+    {   
+     
+        Category::all()->each(function($category){
+
+            $faker = Factory::create();
+            //first
+            $category->boards()->create([
+                'title'=>$faker->word,
+                'user_id'=>$category->user_id
+            ]);
+            //second
+            // $category->boards()->create([
+            //     'title'=>$faker->word,
+            //     'user_id'=>$category->user_id
+            // ]);
+        });
+
     }
 }

@@ -17,7 +17,8 @@ class BoardFactory extends Factory
     public function definition()
     {
         $category_array=Category::pluck('id')->toArray();
-        $user_array=User::pluck('id')->toArray();
+        $user_array=Category::pluck('user_id')->toArray();
+        
         return [
             'user_id'=>Arr::random($user_array),
             'category_id'=>Arr::random($category_array),

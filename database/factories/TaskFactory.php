@@ -16,8 +16,8 @@ class TaskFactory extends Factory
      */
     public function definition()
     {
-        $user_array=User::pluck('id')->toArray();
         $card_array=Card::pluck('id')->toArray();
+        $user_array=Card::pluck('user_id')->toArray();
 
         return [
             'user_id'=>Arr::random($user_array),

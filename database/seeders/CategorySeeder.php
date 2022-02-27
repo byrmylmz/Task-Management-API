@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Faker\Factory;
+
+
 
 class CategorySeeder extends Seeder
 {
@@ -17,6 +20,21 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-      Category::factory()->count(50)->create();
+      //Category::factory()->count(2)->create();
+      User::all()->each(function($user){
+
+        $faker = Factory::create();
+        //first
+        $user->categories()->create([
+            'title'=>$faker->word,
+            'user_id'=>$user->id
+        ]);
+        //second
+        $user->categories()->create([
+            'title'=>$faker->word,
+            'user_id'=>$user->id
+        ]);
+    });
+      
     }
 }

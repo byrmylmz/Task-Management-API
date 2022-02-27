@@ -34,6 +34,13 @@ class Board extends Model
     {
         return $this->belongsTo(User::class);
     }
+     /**
+      * Get the user that owns the board.
+      */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     
 
 }

@@ -26,5 +26,13 @@ class Category extends Model
     {
         return $this->hasMany(Board::class);
     }
+    
+    /**
+     * get the boards for the category.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->text('description');
-            $table->foreignId('card_id')->constrained();
+            $table->foreignId('card_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
