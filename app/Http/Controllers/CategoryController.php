@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategoryCollection;
 use App\Models\Category;
+use App\Models\Board;
+use Google\Service\CloudSearch\Id;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class CategoryController extends Controller
 {
     /**
-     * Permissions middlewares
+     * Permissions 
      */
     public function __construct()
     {
@@ -107,14 +110,31 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function test(Request $request)
-    {
-      $categories=$request->input('categories');
-      foreach($categories as $categoryFront){
-        //   print_r($category['boards'][0]['title']);
-        foreach($categoryFront['boards'] as $boardFront){
-            print_r($boardFront['title']);
+    {   
+        $categories=$request->input('categories');
+     
+        foreach($categories as $key => $categoryFront){
+            
+            $categoryBack=Category::find($categoryFront['id']);
+            $categoryBack->update(
+                [
+                    'order'=>$categoryFront['order'],
+                ]
+            );
+        
+          if(!empty($categoryFront['boards'])){
+              foreach($categoryFront['boards'] as $key => $boardFront){
+                $boardBack=Board::find($boardFront['id']);
+                $boardBack->update(
+                    [
+                        'order'=>$boardFront['order'],
+                        'category_id'=>$boardFront['category_id'],
+                    ]
+                 );
+              }
+          }
         }
-      }
+
 
     }
 }

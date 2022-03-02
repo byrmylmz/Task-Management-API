@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable=['user_id','title'];
+    protected $fillable=['user_id','title','order'];
     /**
      * The booted method of the model.
      */

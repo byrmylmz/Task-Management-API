@@ -42,5 +42,13 @@ class Board extends Model
         return $this->belongsTo(Category::class);
     }
     
+     /**
+      * Test for the draggable
+      */
+    public function boards()
+    {
+        return $this->hasmany(Boards::class,'category_id','id');
+    }
+    
 
 }

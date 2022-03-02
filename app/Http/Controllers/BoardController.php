@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Board\BoardResource;
 use App\Http\Resources\Board\BoardWithColumnResource;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class BoardController extends Controller
 {   
     /**
-     * Permissions middlewares
+     * Permissions 
      */
     public function __construct()
     {
@@ -23,11 +24,18 @@ class BoardController extends Controller
         $this->middleware('permission:update boards')->only('update');
         $this->middleware('permission:delete boards')->only('destroy');
     }
-    //----------------------------------------------------------------
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \App\Http\Resources\Board\BoardResource
+     * 
+     */
+
     public function index()
     {
         $boards=Board::orderBy('order')->get();
-        return response($boards);
+        return BoardResource::collection($boards);
        
     }
 
@@ -35,27 +43,29 @@ class BoardController extends Controller
      * Display a listing of boards with column & cards & tasks
      *
      * @param  \App\Models\Board  $board
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Board\BoardWithColumnResource
      */
     public function boardWithColumn(Board $board)
     {
        return new BoardWithColumnResource($board);
-      // return response($board);
+    
     }
 
     //----------------------------------------------------------------
     public function store(Request $request)
     {   
-        Board::create(
+        $board = Board::create(
             [
                 'user_id'=>auth()->user()->id,
                 'title'=>$request->title,
+                'order'=>1,
                 'category_id'=>$request->category_id
                 ]
             );
             
-            return response('Successfully created', 200);
-        }
+            return new BoardResource($board);
+
+    }
     //----------------------------------------------------------------
     public function updateAll(Request $request)
     {
@@ -79,12 +89,13 @@ class BoardController extends Controller
             'title'=>'required|string',
         ]);
         $board->update($data);
-        return response($board,200);
+
+        return new BoardResource($board);
     }
     //----------------------------------------------------------------
     public function destroy(Board $board)
     {
         $board->delete();
-        return response('deleted',200);
+        return new BoardResource($board);
     }
 }

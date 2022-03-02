@@ -89,8 +89,8 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         Route::post('/boards',[BoardController::class,'store']);
         Route::get('/board/{board}',[BoardController::class,'boardWithColumn']);
         Route::put('/boards/updateAll',[BoardController::class,'updateAll']);
-        Route::patch('/boards/{board}',[BoardController::class,'update']);
-        Route::delete('/boards/{board}',[BoardController::class,'destroy']);
+        Route::patch('/board/{board}',[BoardController::class,'update']);
+        Route::delete('/board/{board}',[BoardController::class,'destroy']);
         
         /* Columns */
         Route::get('/columns',[ColumnController::class,'index']);
