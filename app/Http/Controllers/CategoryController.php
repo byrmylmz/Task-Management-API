@@ -98,4 +98,23 @@ class CategoryController extends Controller
         $category->delete();
         return response('Deleted',200);
     }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function test(Request $request)
+    {
+      $categories=$request->input('categories');
+      foreach($categories as $categoryFront){
+        //   print_r($category['boards'][0]['title']);
+        foreach($categoryFront['boards'] as $boardFront){
+            print_r($boardFront['title']);
+        }
+      }
+
+    }
 }

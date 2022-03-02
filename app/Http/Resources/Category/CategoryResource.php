@@ -19,6 +19,7 @@ class CategoryResource extends JsonResource
         return[
             'id'=>$this->id,
             'title'=>$this->title,
+            'order'=>$this->order,
             'boards'=>BoardResource::collection($this->boards),
         ];
     }

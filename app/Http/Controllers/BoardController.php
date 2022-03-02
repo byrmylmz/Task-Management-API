@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Board\BoardWithColumnResource;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 
@@ -29,6 +30,19 @@ class BoardController extends Controller
         return response($boards);
        
     }
+
+    /**
+     * Display a listing of boards with column & cards & tasks
+     *
+     * @param  \App\Models\Board  $board
+     * @return \Illuminate\Http\Response
+     */
+    public function boardWithColumn(Board $board)
+    {
+       return new BoardWithColumnResource($board);
+      // return response($board);
+    }
+
     //----------------------------------------------------------------
     public function store(Request $request)
     {   

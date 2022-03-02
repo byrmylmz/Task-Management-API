@@ -74,18 +74,20 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         Route::patch('/todosCheckAll',[TodosController::class,'updateAll']);
         Route::delete('/todos/{todo}',[TodosController::class,'destroy']);
         Route::delete('/todosDeleteCompleted',[TodosController::class,'destroyCompleted']);
-        //Route::middleware('auth:api')->post('/logout', [AuthController::class,'logout']);
+      
         
         /* Category */
         Route::get('/categories',[CategoryController::class,'index']);
         Route::get('/categories-with-boards',[CategoryController::class,'categoriesWithBoards']);
         Route::post('/categories',[CategoryController::class,'store']);
+        Route::post('/categories-test',[CategoryController::class,'test']); // test api for order
         Route::patch('/categories/{category}',[CategoryController::class,'update']);
         Route::delete('/categories/{category}',[CategoryController::class,'destroy']);
         
         /* Boards */
         Route::get('/boards',[BoardController::class,'index']);
         Route::post('/boards',[BoardController::class,'store']);
+        Route::get('/board/{board}',[BoardController::class,'boardWithColumn']);
         Route::put('/boards/updateAll',[BoardController::class,'updateAll']);
         Route::patch('/boards/{board}',[BoardController::class,'update']);
         Route::delete('/boards/{board}',[BoardController::class,'destroy']);
@@ -96,6 +98,7 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         Route::post('/columns',[ColumnController::class,'store']);
         Route::patch('/columns/{column}',[ColumnController::class,'update']);
         Route::delete('/columns/{column}',[ColumnController::class,'destroy']);
+        
         
         /* Cards */
         Route::get('/cards',[CardController::class,'index']);

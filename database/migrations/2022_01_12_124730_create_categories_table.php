@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->text('title');
+            $table->unsignedBigInteger('order')->default(1);
             $table->timestamps();
         });
     }
