@@ -24,7 +24,7 @@ class Category extends Model
      */
     public function boards()
     {
-        return $this->hasMany(Board::class);
+        return $this->hasMany(Board::class)->OrderBy('order');
     }
     
     /**

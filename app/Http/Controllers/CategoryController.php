@@ -39,7 +39,7 @@ class CategoryController extends Controller
 
      public function categoriesWithBoards()
      {
-        $categories=Category::all();
+        $categories=Category::orderBy('order')->get();
         return new CategoryCollection($categories);
      }
 

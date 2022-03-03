@@ -21,14 +21,23 @@ class CardController extends Controller
         $this->middleware('permission:update cards')->only('update');
         $this->middleware('permission:delete cards')->only('destroy');
     }
-    //-------------------------------------------------------------------
+   /**
+    * Undocumented function
+    *
+    * @return void
+    */
     public function index()
     {
         $cards=Card::all();
         return CardResource::collection($cards);
         
     }
-    //-------------------------------------------------------------------
+    /**
+     * Undocumented funct
+     *
+     * @param Request $request
+     * @return void
+     */
     public function store(Request $request)
     {
         Card::create(

@@ -43,7 +43,7 @@ class Board extends Model
     }
     
      /**
-      * Test for the draggable
+      * Test for the draggable remove it 
       */
     public function boards()
     {
