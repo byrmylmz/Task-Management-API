@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Concerns\Synchronizable;
-use App\Events\CalendarSync;
 use App\Models\Event;
 use App\Models\GoogleAccount;
 use App\Models\User;

@@ -35,6 +35,7 @@ class BoardController extends Controller
     public function index()
     {
         $boards=Board::orderBy('order')->get();
+        //return response($boards);
         return BoardResource::collection($boards);
        
     }

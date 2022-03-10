@@ -50,7 +50,9 @@ abstract class SynchronizeGoogleResource
             'token' => $list->getNextSyncToken(),
             'last_synchronized_at' => now(),
         ]);
-                
+        /**
+         * 
+         */
         $slice = Str::afterLast($this->synchronization->synchronizable_type, '\\');
         if($slice === 'Calendar')
         {

@@ -80,7 +80,7 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         Route::get('/categories',[CategoryController::class,'index']);
         Route::get('/categories-with-boards',[CategoryController::class,'categoriesWithBoards']);
         Route::post('/categories',[CategoryController::class,'store']);
-        Route::post('/categories-test',[CategoryController::class,'test']); // test api for order
+        Route::post('/sync',[CategoryController::class,'test']); // test api for order
         Route::patch('/categories/{category}',[CategoryController::class,'update']);
         Route::delete('/categories/{category}',[CategoryController::class,'destroy']);
         

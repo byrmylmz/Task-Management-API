@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Board\BoardResource;
 use App\Http\Resources\Category\CategoryCollection;
 use App\Models\Category;
 use App\Models\Board;
-use Google\Service\CloudSearch\Id;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\PseudoTypes\True_;
+use Illuminate\Support\Str;
+use App\Services\Order;
+
 
 class CategoryController extends Controller
 {
@@ -111,30 +112,34 @@ class CategoryController extends Controller
      */
     public function test(Request $request)
     {   
-        $categories=$request->input('categories');
-     
-        foreach($categories as $key => $categoryFront){
-            
-            $categoryBack=Category::find($categoryFront['id']);
-            $categoryBack->update(
-                [
-                    'order'=>$categoryFront['order'],
-                ]
-            );
-        
-          if(!empty($categoryFront['boards'])){
-              foreach($categoryFront['boards'] as $key => $boardFront){
-                $boardBack=Board::find($boardFront['id']);
-                $boardBack->update(
-                    [
-                        'order'=>$boardFront['order'],
-                        'category_id'=>$boardFront['category_id'],
-                    ]
-                 );
-              }
-          }
+        $data=$request->input('data');
+
+        foreach($data as $action){
+
+            $command = Str::after($action['command'],'_');
+            switch($command){
+
+                case 'moved':
+                    $slice=Str::before($action['command'],'_');
+                    $class=Str::headline($slice);
+                    $this->move($action['items'],$class);
+                    break;
+
+                case 'reorder':
+                    $slice=Str::before($action['command'],'_');
+                    $class=Str::headline($slice);
+                    $response=Order::order($action['items'],$class);
+                    return response($response);
+                    break;
+            }
         }
-
-
     }
+
+    public function move($item,$classname){
+        $class = '\App\Models\\'.$classname;
+        $class::find($item['item_id'])->update(['category_id'=>$item['category_id']]);
+        return response('test');
+    }
+
+   
 }
