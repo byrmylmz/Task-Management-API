@@ -120,18 +120,22 @@ class CategoryController extends Controller
        
         $result = SyncResponse::make();
 
-       // return response($result->user_settings='deneme');
-        foreach($request->commands as $action){
+        $grouped =collect($request->commands);
+      
+        $groups=$grouped->all();
 
-            $command = Str::after($action['type'],'_');
-            $slice = Str::before($action['type'],'_');
-            $class = Str::headline($slice);
-            // $property = Str::lower($classname);
-            // $propertyName = Str::of($property)->append('s');
 
-            match($command){
+
+
+
+        foreach($groups as $group){
+          
+     
+
+            match($group['type']){
                 'moved' => $result->moved = MoveCommand::run($action['items'],$class) , //
-                'reorder'=> $result->boards = ReorderCommand::run($action['items'],$class,$fullSync),//
+                //'reorder'=> $result->boards = ReorderCommand::run($action['items'],$class,$fullSync),//
+                'board'=> $result->boards = ReorderCommand::run($group),//
                 'default'=>'unknown status code'
             };                   
         }
