@@ -10,6 +10,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoogleAccountController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PassportController;
+use App\Http\Controllers\SyncController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TodosController;
 use App\Http\Controllers\UserController;
@@ -45,6 +46,9 @@ use Laravel\Socialite\Facades\Socialite;
 */  
 
 Route::middleware(['auth:sanctum','trial'])->group(function(){
+        //sync all
+        Route::get('/sync',[SyncController::class,'index']);
+        
         // google accounts
         Route::get('/gaccounts', [GoogleAccountController::class,'index']);
         Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);
@@ -80,7 +84,7 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         Route::get('/categories',[CategoryController::class,'index']);
         Route::get('/categories-with-boards',[CategoryController::class,'categoriesWithBoards']);
         Route::post('/categories',[CategoryController::class,'store']);
-        Route::post('/sync',[CategoryController::class,'test']); // test api for order
+        Route::post('/syncA',[CategoryController::class,'test']); // test api for order
         Route::patch('/categories/{category}',[CategoryController::class,'update']);
         Route::delete('/categories/{category}',[CategoryController::class,'destroy']);
         

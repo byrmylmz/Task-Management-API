@@ -1,4 +1,4 @@
-key<?php
+<?php
 
 namespace App\Actions\Fortify;
 

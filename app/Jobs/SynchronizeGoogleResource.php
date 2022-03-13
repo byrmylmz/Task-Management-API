@@ -50,8 +50,10 @@ abstract class SynchronizeGoogleResource
             'token' => $list->getNextSyncToken(),
             'last_synchronized_at' => now(),
         ]);
+
+
         /**
-         * 
+         * here is my dispatch
          */
         $slice = Str::afterLast($this->synchronization->synchronizable_type, '\\');
         if($slice === 'Calendar')
@@ -59,6 +61,7 @@ abstract class SynchronizeGoogleResource
             $userId = Calendar::find($this->synchronization->synchronizable_id)->googleAccount['user_id'];
             CalendarSync::dispatch($userId);
         }
+
 
     }
 

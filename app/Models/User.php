@@ -110,6 +110,32 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Board::class);
     }
+
+    /**
+     * Get the columns for the user
+     */
+    public function columns()
+    {
+        return $this->hasMany(Column::class);
+    }
+
+    /**
+     * Get the cards for the user
+     */
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
+
+    /**
+     * Get the tasks for the user
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+
     /**
      * Messeage and idadmin for the package of laravel vue spa
      */

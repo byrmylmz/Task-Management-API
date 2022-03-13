@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Board\BoardResource;
+use App\Actions\Commands\MoveCommand;
 use App\Http\Resources\Category\CategoryCollection;
 use App\Models\Category;
-use App\Models\Board;
+use App\Models\Board; // keep it here
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Services\Order;
+use App\Actions\Commands\ReorderCommand;
+use App\Actions\Objects\SyncResponse;
+use App\Http\Resources\Syncronization\SyncResource;
 
-
-class CategoryController extends Controller
+class CategoryController extends Controller 
 {
     /**
      * Permissions 
@@ -23,6 +24,8 @@ class CategoryController extends Controller
         $this->middleware('permission:updateAll categories')->only('updateAll');
         $this->middleware('permission:update categories')->only('update');
         $this->middleware('permission:delete categories')->only('destroy');
+        //$this->middleware('permission:delete categories')->only('test');
+        
     }
     /**
      * Display a listing of the resource.
@@ -112,34 +115,34 @@ class CategoryController extends Controller
      */
     public function test(Request $request)
     {   
-        $data=$request->input('data');
+       
+        $fullSync=$request->full_sync;
+       
+        $result = SyncResponse::make();
 
-        foreach($data as $action){
+       // return response($result->user_settings='deneme');
+        foreach($request->commands as $action){
 
-            $command = Str::after($action['command'],'_');
-            switch($command){
+            $command = Str::after($action['type'],'_');
+            $slice = Str::before($action['type'],'_');
+            $class = Str::headline($slice);
+            // $property = Str::lower($classname);
+            // $propertyName = Str::of($property)->append('s');
 
-                case 'moved':
-                    $slice=Str::before($action['command'],'_');
-                    $class=Str::headline($slice);
-                    $this->move($action['items'],$class);
-                    break;
-
-                case 'reorder':
-                    $slice=Str::before($action['command'],'_');
-                    $class=Str::headline($slice);
-                    $response=Order::order($action['items'],$class);
-                    return response($response);
-                    break;
-            }
+            match($command){
+                'moved' => $result->moved = MoveCommand::run($action['items'],$class) , //
+                'reorder'=> $result->boards = ReorderCommand::run($action['items'],$class,$fullSync),//
+                'default'=>'unknown status code'
+            };                   
         }
-    }
-
-    public function move($item,$classname){
-        $class = '\App\Models\\'.$classname;
-        $class::find($item['item_id'])->update(['category_id'=>$item['category_id']]);
-        return response('test');
+        
+        return new SyncResource($result);
+        
     }
 
    
+
+   
 }
+
+
