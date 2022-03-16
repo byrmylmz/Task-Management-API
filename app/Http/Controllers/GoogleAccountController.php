@@ -15,7 +15,7 @@ class GoogleAccountController extends Controller
         //$this->middleware('auth');
     }
 
-        /**
+     /**
      * Display a listing of the google accounts.
      */
     public function index()

@@ -47,7 +47,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::middleware(['auth:sanctum','trial'])->group(function(){
         //sync all
-        Route::get('/sync',[SyncController::class,'index']);
+        Route::post('/sync',SyncController::class);
         
         // google accounts
         Route::get('/gaccounts', [GoogleAccountController::class,'index']);

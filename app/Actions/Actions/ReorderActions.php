@@ -9,17 +9,18 @@ use App\Http\Resources\Syncronization\SyncResource;
 
 
 
-class ReorderCommand 
+class ReorderAction
+
 {
     use AsAction;
 
 
-    public static function handle(array $items){
+    public static function handle( $items){
        
         Gate::authorize('create categories', ReorderCommand::class);
 
         
-        return $items['items'];
+        return $items;
         // $class = '\App\Models\\'.$classname;
         // $collection = collect();
         // foreach($items as $item){

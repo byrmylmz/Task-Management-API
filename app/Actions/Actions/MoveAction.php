@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Actions\Commands;
+namespace App\Actions\Actions;
 
-use Lorisleiva\Actions\Concerns\AsObject;
+use Lorisleiva\Actions\Concerns\AsAction;
 
-class MoveCommand
+class MoveAction
+
 {
-    use AsObject;
+    use AsAction;
 
     public function handle($item,$classname){
         $class = '\App\Models\\'.$classname;
