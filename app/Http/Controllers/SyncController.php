@@ -12,8 +12,11 @@ class SyncController extends Controller
     public function __invoke(Request $request)
     {   
         $fullSync=$request->full_sync;
+
         $result = SyncResponseObject::make();
+
         $collection =collect($request->commands);
+        
         $grouped = $collection->groupBy('type');
         $groups=$grouped->all();
 
@@ -22,7 +25,7 @@ class SyncController extends Controller
         foreach($groupName as $model){
 
             //App\Actions\Models\BoardActions
-            $naeSpamce ="App\Actions\Models\\".ucfirst($model."Model");
+            $nameSpace ="App\Actions\Models\\".ucfirst($model."Model");
 
             $result->$model = $nameSpace::run($groups[$model]);                 
         }
