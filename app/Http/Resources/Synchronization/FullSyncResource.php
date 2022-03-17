@@ -15,15 +15,12 @@ class FullSyncResource extends JsonResource
     public function toArray($request)
     {
         return
-                 [
-                    // 'full_sync'=>$this->fullSync,
-                    'moved'=>$this->moved,
-
-                    'categories'=>auth()->user()->category,
-                    'boards'=>auth()->user()->board,
-                    'columns'=>auth()->user()->column,
-                    'cards'=>auth()->user()->card,
-                    'tasks'=>auth()->user()->task,
+                 [    
+                    'categories'=>auth()->user()->categories,
+                    'boards'=>auth()->user()->boards,
+                    'columns'=>auth()->user()->columns,
+                    'cards'=>auth()->user()->cards,
+                    'tasks'=>auth()->user()->tasks,
                     'temp_id_mapping'=>'temp id mapping',
                     'user'=>auth()->user(),//new UserResource(auth()->user())
                     'user_plan_limits'=>'user plan limit',

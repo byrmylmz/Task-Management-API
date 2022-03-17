@@ -2,20 +2,24 @@
 
 namespace App\Actions\Actions;
 
+use App\Actions\Objects\ActionsResultObject;
+use Illuminate\Support\Facades\Gate;
 use Lorisleiva\Actions\Concerns\AsAction;
+use App\Http\Controllers\SyncController;
+use Illuminate\Queue\Jobs\SyncJob;
 
-class ReorderAction
+class ReorderAction 
 {
     use AsAction;
 
 
-    public static function handle( $items){
+    public static function handle($items,$model){
        
-        //Gate::authorize('create categories', ReorderCommand::class);
-
+      
+       // Gate::authorize('create categories', ReorderCommand::class);
         
-        return $items;
-        foreach($items as $item){return $item;}
+       
+       
         // $class = '\App\Models\\'.$classname;
         // $collection = collect();
         // foreach($items as $item){

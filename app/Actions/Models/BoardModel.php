@@ -3,33 +3,35 @@
 namespace App\Actions\Models;
 
 use Illuminate\Support\Facades\Gate;
-use App\Actions\Objects\ActionsResultObject;
+use App\Actions\Objects\ModelResultObject;
 use Lorisleiva\Actions\Concerns\AsAction;
+use App\Http\Controllers\SyncController;
 
-class BoardModel
+class BoardModel 
 {
     use AsAction;
 
-    public static function handle($items){
+    public static function handle($items,$action){
        
-       Gate::authorize('create categories', ReorderCommand::class);
+      Gate::authorize('create categories', ReorderCommand::class);
 
-       $result = ActionsResultObject::make();
+    //   $result = ModelResultObject::make();
+     
+      $collection =collect($items);
+    //    $grouped = $collection->groupBy('type');
+    //    $groups=$grouped->all();
 
-       $collection =collect($items);
-       $grouped = $collection->groupBy('action');
-       $groups=$grouped->all();
+    //    $groupName=array_keys($groups);
 
-       $groupName=array_keys($groups);
-
-       foreach($groupName as $action){
-
+       foreach($collection as $item){
+     
+        //  $actionName= explode('_',$item['type'])[1];
         //App\Actions\Actions\BoardActions
         $nameSpace ="App\Actions\Actions\\".ucfirst($action."Action");
 
-        $result->arg = $nameSpace::run($groups[$action]);                 
+        return $nameSpace::run($collection);                 
     }
-        return $result;
+       
        
     }
 }

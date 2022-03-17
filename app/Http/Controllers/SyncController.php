@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Models\CategoryModel;
 use Illuminate\Http\Request;
 use App\Actions\Objects\SyncResponseObject;
 use App\Http\Resources\Synchronization\SyncResource;
@@ -9,28 +10,40 @@ use App\Http\Resources\Synchronization\FullSyncResource;
 
 class SyncController extends Controller
 {
+    
     public function __invoke(Request $request)
     {   
         $fullSync=$request->full_sync;
 
-        $result = SyncResponseObject::make();
-
         $collection =collect($request->commands);
+        $action= new ActionController($collection);
+      
+        return $fullSync ? new FullSyncResource('') : $action->result() ;
+         
+         
+        //return $collection->items;
+
+         //return array_column($request->commands,'items');
         
-        $grouped = $collection->groupBy('type');
-        $groups=$grouped->all();
+        //  $grouped = $collection->groupBy('type');
 
-        $groupName=array_keys($groups);
+        // $groups=$grouped->all();
+        //   //return array_column($groups,'type');
 
-        foreach($groupName as $model){
+        // $types=array_keys($groups);
 
-            //App\Actions\Models\BoardActions
-            $nameSpace ="App\Actions\Models\\".ucfirst($model."Model");
+        // foreach($types as $type){  
+     
+        //      $modelName= explode("_",$type)[0];
+        //       $actionName= explode("_",$type)[1];
 
-            $result->$model = $nameSpace::run($groups[$model]);                 
-        }
-        
-        return $fullSync ? new FullSyncResource('') : new SyncResource($result) ;
+        //      //App\Actions\Models\BoardActions
+        //      $nameSpace ="App\Actions\Actions\\".ucfirst($actionName."Action");
+
+        //     return $nameSpace::run($groups['board_reorder'],$modelName);                 
+        // }   
+        // return $result;
+        //return $fullSync ? new FullSyncResource('') : new SyncResource($result) ;
         
     }
 }
