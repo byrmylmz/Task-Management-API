@@ -52,6 +52,7 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
         // google accounts
         Route::get('/gaccounts', [GoogleAccountController::class,'index']);
         Route::delete('/google/{googleAccount}', [GoogleAccountController::class,'destroy']);
+        
         Route::get('/events',[EventController::class,'index']);
         Route::post('/events',[EventController::class,'store']);
         Route::delete('/events/{id}',[EventController::class,'destroy']);
