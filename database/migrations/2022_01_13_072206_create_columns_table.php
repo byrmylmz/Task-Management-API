@@ -18,6 +18,7 @@ class CreateColumnsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->foreignId('board_id')->constrained()->onDelete('cascade');
+            $table->integer('order')->default(1);
             $table->timestamps();
         });
     }

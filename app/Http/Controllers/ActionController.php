@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Actions\AddAction;
+use App\Http\Controllers\Actions\MoveAction;
+use App\Http\Controllers\Actions\UpdateAction;
+
 
 trait SyncResponseObject
 {
@@ -20,8 +24,8 @@ trait SyncResponseObject
             'category'=>'App\Models\Category'::findMany(array_unique($this->category)),
             'board'=>'App\Models\Board'::findMany(array_unique($this->board)),
             'column'=>'App\Models\Column'::findMany(array_unique($this->column)),
-            'card'=>$this->card,
-            'task'=>$this->task,
+            'card'=>'App\Models\Card'::findMany(array_unique($this->card)),
+            'task'=>'App\Models\Task'::findMany(array_unique($this->task)),
             'temp_id_mapping'=>$this->temp_id_mapping,
             'user_plan_limit'=>$this->user_plan_limit,
             'user_setting'=>$this->user_setting,
@@ -32,6 +36,7 @@ trait SyncResponseObject
 class ActionController extends SyncController
 {       
     use SyncResponseObject;
+
     public $boardMap=[];
 
     public function __construct($collection)
@@ -44,54 +49,69 @@ class ActionController extends SyncController
             $this->$action($part['items'],$model);
         }
     }
-    public function add()
-    {
-
+    
+    public function add($items,$model)
+    {       
+        $add = AddAction::$model($items);
+        array_push($this->$model,$add);     
+            
     }
 
-    public function update()
-    {
-
-    }
-
-    public function moved($items,$model)
+    public function update($items,$model)
     {   
-           $class = '\App\Models\\'.ucfirst($model);
        
-            $move = $class::find($items['id']);
-            $move->update(['category_id'=>$items['category_id']]); 
-            array_push($this->$model,$move->id);    
-       
+        $update = UpdateAction::$model($items);
+        array_push($this->$model,$update);     
+
+    }
+
+    public function move($items,$model)
+    {   
+        $move = MoveAction::$model($items);
+        array_push($this->$model,$move);  
+
     }
 
     public function reorder($items,$model)
     {   
         $class = '\App\Models\\'.ucfirst($model);
 
-        foreach($items as $items)
+        foreach($items as $item)
         {   
-            $reorder = $class::find($items['id']);
-            $reorder->update(['order'=>$items['order']]);
-           
+            $reorder = $class::find($item['id']);
+            
+            $reorder->update([
+                'order'=>$item['order']
+            ]);
+
             array_push($this->$model,$reorder->id);
             
         }       
     }
 
-    public function delete()
+    public function delete($items,$model)
     {
+        $class = '\App\Models\\'.ucfirst($model);
+        $find = $class::find($items['id']);
+        try {
+            $find->delete();
+        } catch (\Throwable $e) {
+            throw new \Exception('You can not delete');
+        }
 
     }
 
     public function complete()
     {
-
+        //
     }
 
     public function uncomplete()
     {
-
+        //
     }
+
+
 
    
  
