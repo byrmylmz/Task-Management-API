@@ -43,8 +43,13 @@ Route::get('/', function () {
     });
 
     Route::get('/redis',function(){
-       $visits= Redis::incr('visits');
-       return $visits;
+       $redis = Redis::connection();
+    try {
+        var_dump($redis->ping());
+    } catch (\Throwable $th) {
+     $th->getmessage();
+    }
+     
     });
 
 
