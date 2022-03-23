@@ -42,7 +42,7 @@ class EventController extends Controller
         
         
         $results = $service->events->insert($calendarId,$event);
-        //printf('Event created: %s\n', $results->start->dateTime);
+        printf('Event created: %s\n', $results->start->dateTime);
         
         auth()->user()->googleAccounts()->first()->calendars()->first()->events()->updateOrCreate(
             [
