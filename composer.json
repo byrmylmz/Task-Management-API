@@ -28,11 +28,12 @@
     },
 
     "require-dev": {
-        "spatie/laravel-ignition": "^1.0",
         "laravel/sail": "^1.0.1",
+        "laravel/telescope": "^4.8",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.8"
+        "phpunit/phpunit": "^9.5.8",
+        "spatie/laravel-ignition": "^1.0"
     },
 
     "autoload": {
@@ -65,7 +66,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {

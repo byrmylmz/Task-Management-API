@@ -1,12 +1,13 @@
 <?php
 
-use App\Events\CalendarSync;
-use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GoogleAccountController;
-use App\Http\Controllers\GoogleWebhookController;
 use App\Models\Calendar;
 use Illuminate\Support\Str;
+use App\Events\CalendarSync;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\GoogleAccountController;
+use App\Http\Controllers\GoogleWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,13 @@ Route::get('/', function () {
         $userId=4;
         CalendarSync::dispatch($userId);
     });
+
+    Route::get('/redis',function(){
+       $visits= Redis::incr('visits');
+       return $visits;
+    });
+
+
 
  
     
