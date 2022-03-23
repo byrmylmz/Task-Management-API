@@ -42,13 +42,14 @@ Route::get('/', function () {
         CalendarSync::dispatch($userId);
     });
 
+
     Route::get('/redis',function(){
        $redis = Redis::connection();
     try {
         var_dump($redis->ping());
-    } catch (\Throwable $th) {
-     $th->getmessage();
-    }
+    } catch (Exception $e){
+            $e->getMessage();
+        }
      
     });
 
