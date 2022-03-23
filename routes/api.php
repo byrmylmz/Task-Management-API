@@ -46,6 +46,16 @@ use Laravel\Socialite\Facades\Socialite;
 */  
 
 Route::middleware(['auth:sanctum','trial'])->group(function(){
+
+        // permission
+        Route::get('permissions', function(){
+            return auth()->user()->getAllPermissions()->pluck('name');
+        });
+        // roles
+        Route::get('roles', function(){
+            return auth()->user()->getRoleNames();
+        }); 
+
         //sync all
         Route::post('/sync',SyncController::class);
         
