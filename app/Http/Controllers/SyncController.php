@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ActionController;
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Synchronization\FullSyncResource;
 
 class SyncController extends Controller
@@ -15,9 +16,17 @@ class SyncController extends Controller
 
         $collection =collect($request->commands);
         $action= new ActionController($collection);
-      
-        return $fullSync ? new FullSyncResource('') : $action->result() ;
-
+        
+       /**
+        * Seperate Json Response Structure.
+        */ 
+       //return $fullSync ? new FullSyncResource('') : $action->result() ;
+       
+       /**
+        * Nested Json Response Structure.
+        */
+        return $fullSync ?  CategoryResource::collection((auth()->user()->categories)) : $action->result() ;
+       
         
     }
 }

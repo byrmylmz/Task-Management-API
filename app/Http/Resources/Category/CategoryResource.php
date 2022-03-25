@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources\Category;
 
-use App\Http\Resources\Board\BoardResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Board\BoardWithColumnResource;
 
 class CategoryResource extends JsonResource
 {   
@@ -20,7 +20,7 @@ class CategoryResource extends JsonResource
             'id'=>$this->id,
             'title'=>$this->title,
             'order'=>$this->order,
-            'boards'=>BoardResource::collection($this->boards),
+            'boards'=>BoardWithColumnResource::collection($this->boards),
         ];
     }
 }

@@ -3,17 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Actions\Models\BoardActions;
-use App\Actions\Commands\MoveCommand;
-use App\Actions\Objects\SyncResponse;
-use App\Models\Board; // keep it here
-use App\Actions\Models\CategoryActions;
-use App\Actions\Commands\ReorderCommand;
 use App\Http\Resources\Category\CategoryCollection;
-use App\Http\Resources\Syncronization\SyncResource;
-
 class CategoryController extends Controller 
 {
     /**
@@ -109,39 +100,6 @@ class CategoryController extends Controller
     }
 
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  \App\Models\Category  $category
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function test(Request $request)
-    // {   
-       
-    //     $fullSync=$request->full_sync;
-       
-    //     $result = SyncResponse::make();
-
-    //     $collection =collect($request->commands);
-    //     $grouped = $collection->groupBy('type');
- 
-    //     $groups=$grouped->all();
-      
-    //     $groupName=array_keys($groups);
-  
-    //     foreach($groupName as $model){
-           
-    //         match($model){
-    //             'moved' => $result->moved = MoveCommand::run($action['items'],$class) , //
-    //             'board'=> $result->boards = BoardActions::run($groups[$model]),
-    //             'category'=> $result->categories = CategoryActions::run($groups[$model]),
-    //             'default'=>'unknown status code'
-    //         };                   
-    //     }
-        
-    //     return new SyncResource($result);
-        
-    // }
 
    
 

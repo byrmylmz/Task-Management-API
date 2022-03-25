@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Board;
 
+use App\Http\Resources\Column\ColumnResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BoardResource extends JsonResource
