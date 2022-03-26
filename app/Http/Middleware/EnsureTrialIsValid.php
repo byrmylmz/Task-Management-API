@@ -16,7 +16,7 @@ class EnsureTrialIsValid
      */
     public function handle(Request $request, Closure $next)
     {   
-        if(auth()->user()->hasRole('super-admin')){
+        if(auth()->user()->hasRole('admin')){
             // now dont do anyting
         }else{
 

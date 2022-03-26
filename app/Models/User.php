@@ -142,7 +142,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getIsAdminFirstAttribute()
     {
         foreach ($this->getRoleNames() as $key => $role) {
-            if($role === 'super-admin'){
+            if($role === 'admin'){
                 return $this->attribute = true;
             }else{
                 return $this->attribute = false;

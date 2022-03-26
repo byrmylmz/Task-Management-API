@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
          * like: auth()->user->can() and in @can()
          */
         Gate::before(function ($user, $ability) {
-            return $user->hasRole('super-admin') ? true : null;
+            return $user->hasRole('admin') ? true : null;
         });
         
     }
