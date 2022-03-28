@@ -41,7 +41,6 @@ class ActionController extends SyncController
 
     public function __construct($collection)
     {   
-        
         foreach($collection as  $part)
         {
             $model = explode("_",$part['type'])[0];

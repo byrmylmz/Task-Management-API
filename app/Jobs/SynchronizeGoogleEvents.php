@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Events\CalendarSync;
 use App\Jobs\SynchronizeGoogleResource;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,12 +17,14 @@ class SynchronizeGoogleEvents extends SynchronizeGoogleResource implements Shoul
     public function getGoogleRequest($service, $options)
     {
         return $service->events->listEvents(
+            // We provide the Google ID of the calendar from which we want the events.
             $this->synchronizable->google_id, $options
         );
     }
 
     public function syncItem($googleEvent)
-    {
+    {   
+        // A Google event has been deleted if its status is `cancelled`.
         if ($googleEvent->status === 'cancelled') {
             return $this->synchronizable->events()
                 ->where('google_id', $googleEvent->id)

@@ -16,7 +16,7 @@ class BoardWithColumnResource extends JsonResource
     public function toArray($request)
     {
       return [
-         // 'id'=>$this->id,
+          'id'=>$this->id,
           'title'=>$this->title,
           'order'=>$this->order,
           'columns'=>ColumnResource::collection($this->columns)
