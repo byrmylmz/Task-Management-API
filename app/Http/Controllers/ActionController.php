@@ -100,15 +100,31 @@ class ActionController extends SyncController
 
     }
 
-    public function complete()
+    public function complete($items,$model)
     {
-        //
+        $class = '\App\Models\\'.ucfirst($model);
+        $find = $class::find($items['id']);
+        $find->update([
+            'checked'=>true,
+          
+        ]);
+        array_push($this->$model,$find->id);
+        
+    }
+    
+    public function uncomplete($items,$model)
+    {
+        $class = '\App\Models\\'.ucfirst($model);
+        $find = $class::find($items['id']);
+        $find->update([
+            'checked'=>false,
+          
+        ]);
+        array_push($this->$model,$find->id);
+        
     }
 
-    public function uncomplete()
-    {
-        //
-    }
+
 
 
 
