@@ -25,7 +25,7 @@ class SyncController extends Controller
        /**
         * Nested Json Response Structure.
         */
-        return $fullSync ?  CategoryResource::collection((auth()->user()->categories)) : $action->result() ;
+        return $fullSync ?  CategoryResource::collection((auth()->user()->categories)->load('boards')) : $action->result() ;
        
         
     }

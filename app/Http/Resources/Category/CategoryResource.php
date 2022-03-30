@@ -20,7 +20,7 @@ class CategoryResource extends JsonResource
             'id'=>$this->id,
             'title'=>$this->title,
             'order'=>$this->order,
-            'boards'=>BoardWithColumnResource::collection($this->boards),
+            'boards'=>BoardWithColumnResource::collection($this->boards->load('columns')),
         ];
     }
 }

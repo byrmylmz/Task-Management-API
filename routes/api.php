@@ -136,7 +136,6 @@ Route::middleware(['auth:sanctum','trial'])->group(function(){
      | Third Party Register
      |----------------------------------
      */
-    
         // Route::post('/login', [AuthController::class,'login']);
         // Route::post('/register', [AuthController::class,'register']);
         // Route::post('/oauth/token', [PassportController::class,'auth']);
