@@ -15,6 +15,7 @@ class CreateColumnsTable extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->id();
+            $table->uuid('temp_id')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->foreignId('board_id')->constrained()->onDelete('cascade');

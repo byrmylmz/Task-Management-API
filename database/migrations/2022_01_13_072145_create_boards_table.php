@@ -15,6 +15,7 @@ class CreateBoardsTable extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
+            $table->uuid('temp_id')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');

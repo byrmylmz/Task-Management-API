@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use stdClass;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Actions\AddAction;
 use App\Http\Controllers\Actions\MoveAction;
 use App\Http\Controllers\Actions\UpdateAction;
+
 
 
 trait SyncResponseObject
@@ -14,9 +17,9 @@ trait SyncResponseObject
     public $column = [];
     public $card = [];
     public $task = [];
-    public $temp_id_mapping = "";
     public $user_plan_limit ="";
     public $user_setting = "";
+    public $temp_id_store = [];
 
     public function result()
     {
@@ -26,33 +29,40 @@ trait SyncResponseObject
             'column'=>'App\Models\Column'::findMany(array_unique($this->column)),
             'card'=>'App\Models\Card'::findMany(array_unique($this->card)),
             'task'=>'App\Models\Task'::findMany(array_unique($this->task)),
-            'temp_id_mapping'=>$this->temp_id_mapping,
             'user_plan_limit'=>$this->user_plan_limit,
             'user_setting'=>$this->user_setting,
+            'temp_id_mapping'=>$this->temp_id_store,
         );
     }
 }
+
+
+
 
 class ActionController extends SyncController
 {       
     use SyncResponseObject;
 
-    public $boardMap=[];
 
+    
     public function __construct($collection)
     {   
+
         foreach($collection as  $part)
         {
             $model = explode("_",$part['type'])[0];
             $action = explode("_",$part['type'])[1];
-            $this->$action($part['items'],$model);
+            $this->$action($part['items'],$model,$part['temp_id']);
         }
     }
     
-    public function add($items,$model)
+    public function add($items,$model,$temp_id)
     {       
         $add = AddAction::$model($items);
-        array_push($this->$model,$add);     
+        array_push($this->$model,$add);
+
+        // temp id storing to the data.
+        $this->temp_id_store[$temp_id]=$add;
             
     }
 

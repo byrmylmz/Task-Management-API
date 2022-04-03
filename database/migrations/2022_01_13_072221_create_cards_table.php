@@ -15,6 +15,7 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
+            $table->uuid('temp_id')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->foreignId('column_id')->constrained()->onDelete('cascade');

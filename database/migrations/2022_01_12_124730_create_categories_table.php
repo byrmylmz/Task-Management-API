@@ -15,6 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->uuid('temp_id')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->text('title');
             $table->integer('order')->default(1);

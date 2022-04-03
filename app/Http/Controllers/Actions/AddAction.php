@@ -8,6 +8,7 @@ use App\Models\Card;
 use App\Models\Category;
 use App\Models\Column;
 use App\Models\Task;
+use Illuminate\Support\Facades\DB;
 
 class AddAction extends ActionController
 {
@@ -16,6 +17,7 @@ class AddAction extends ActionController
         $add = Category::create([
             'user_id'=>auth()->user()->id,
             'title'=>$items['title'],
+            // 'temp_id'=>$items['temp_id'],
         ]);
         return $add->id;
     }
