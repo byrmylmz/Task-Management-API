@@ -21,7 +21,7 @@ class CreateTasksTable extends Migration
             $table->text('description');
             $table->foreignId('card_id')->constrained()->onDelete('cascade');
             $table->boolean('checked')->default(false);
-            $table->integer('order')->default(1);
+            $table->integer('order');
             $table->timestamps();
         });
     }

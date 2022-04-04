@@ -19,7 +19,7 @@ class CreateBoardsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->integer('order')->default(1);
+            $table->integer('order');
             $table->timestamps();
         });
     }

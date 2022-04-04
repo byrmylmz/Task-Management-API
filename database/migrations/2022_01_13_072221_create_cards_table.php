@@ -19,7 +19,7 @@ class CreateCardsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->foreignId('column_id')->constrained()->onDelete('cascade');
-            $table->integer('order')->default(1);
+            $table->integer('order');
             $table->timestamps();
         });
     }
