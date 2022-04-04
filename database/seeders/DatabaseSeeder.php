@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
       $this->call([
         //UserSeeder::class,
         RolesAndPermissionSeeder::class,
-        // CategorySeeder::class,
-        // BoardSeeder::class,
-        // ColumnSeeder::class,
-        // CardSeeder::class,
-        // TaskSeeder::class,
+        CategorySeeder::class,
+        BoardSeeder::class,
+        ColumnSeeder::class,
+        CardSeeder::class,
+        TaskSeeder::class,
       ]);
    }
 }
