@@ -24,13 +24,15 @@ class ColumnSeeder extends Seeder
         //first
         $board->columns()->create([
             'title'=>$faker->word,
-            'user_id'=>$board->user_id
+            'user_id'=>$board->user_id,
+            'order'=>1,
         ]);
         //second
-        // $board->columns()->create([
-        //     'title'=>$faker->word,
-        //     'user_id'=>$board->user_id
-        // ]);
+        $board->columns()->create([
+            'title'=>$faker->word,
+            'user_id'=>$board->user_id,
+            'order'=>2,
+        ]);
       });
     }
 }

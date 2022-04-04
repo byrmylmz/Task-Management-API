@@ -24,14 +24,16 @@ class TaskSeeder extends Seeder
             $card->tasks()->create([
                 'title'=>$faker->word,
                 'user_id'=>$card->user_id,
-                'description'=>$faker->text
+                'description'=>$faker->text,
+                'order'=>1,
 
             ]);
             //second
             $card->tasks()->create([
                 'title'=>$faker->word,
                 'user_id'=>$card->user_id,
-                'description'=>$faker->text
+                'description'=>$faker->text,
+                'order'=>2,
 
             ]);
           });

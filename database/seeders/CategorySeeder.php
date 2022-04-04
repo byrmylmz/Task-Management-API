@@ -21,7 +21,6 @@ class CategorySeeder extends Seeder
     public function run()
     {
       //Category::factory()->count(2)->create();
-      $order =1;
       User::all()->each(function($user){
 
         $faker = Factory::create();
@@ -29,13 +28,13 @@ class CategorySeeder extends Seeder
         $user->categories()->create([
             'title'=>$faker->word,
             'user_id'=>$user->id,
-            'order'=>$order+1,
+            'order'=>1,
         ]);
         //second
         $user->categories()->create([
             'title'=>$faker->word,
             'user_id'=>$user->id,
-            'order'=>$order+1,
+            'order'=>2,
         ]);
     });
       

@@ -16,7 +16,6 @@ class BoardSeeder extends Seeder
      */
     public function run()
     {   
-        $order=1;
         Category::all()->each(function($category){
 
             $faker = Factory::create();
@@ -24,14 +23,15 @@ class BoardSeeder extends Seeder
             $category->boards()->create([
                 'title'=>$faker->word,
                 'user_id'=>$category->user_id,
-                'order'=>$order+1,
+                'order'=>1,
             ]);
 
-            //second
-            // $category->boards()->create([
-            //     'title'=>$faker->word,
-            //     'user_id'=>$category->user_id
-            // ]);
+            // second
+            $category->boards()->create([
+                'title'=>$faker->word,
+                'user_id'=>$category->user_id,
+                'order'=>1,
+            ]);
         });
 
     }

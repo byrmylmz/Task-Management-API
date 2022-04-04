@@ -24,11 +24,13 @@ class CardSeeder extends Seeder
             $column->cards()->create([
                 'title'=>$faker->word,
                 'user_id'=>$column->user_id,
+                'order'=>1,
             ]);
             //second
             $column->cards()->create([
                 'title'=>$faker->word,
                 'user_id'=>$column->user_id,
+                'order'=>2,
             ]);
           });
     }
