@@ -16,15 +16,17 @@ class BoardSeeder extends Seeder
      */
     public function run()
     {   
-     
+        $order=1;
         Category::all()->each(function($category){
 
             $faker = Factory::create();
             //first
             $category->boards()->create([
                 'title'=>$faker->word,
-                'user_id'=>$category->user_id
+                'user_id'=>$category->user_id,
+                'order'=>$order+1,
             ]);
+
             //second
             // $category->boards()->create([
             //     'title'=>$faker->word,
