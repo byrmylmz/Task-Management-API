@@ -17,7 +17,6 @@ class AddAction extends ActionController
         $add = Category::create([
             'user_id'=>auth()->user()->id,
             'title'=>$items['title'],
-            // 'temp_id'=>$items['temp_id'],
         ]);
         return $add->id;
     }

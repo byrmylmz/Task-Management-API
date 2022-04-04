@@ -52,7 +52,14 @@ class ActionController extends SyncController
         {
             $model = explode("_",$part['type'])[0];
             $action = explode("_",$part['type'])[1];
-            $this->$action($part['items'],$model,$part['temp_id']);
+
+            // temp id is only with adding actions
+            if(isset($part['temp_id'])){
+                $this->$action($part['items'],$model,$temp_id);
+            }else{
+                $this->$action($part['items'],$model);
+            }
+            
         }
     }
     
