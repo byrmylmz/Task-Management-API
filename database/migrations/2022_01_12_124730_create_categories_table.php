@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->uuid('temp_id')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->text('title');
-            $table->integer('order')->default(1);
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

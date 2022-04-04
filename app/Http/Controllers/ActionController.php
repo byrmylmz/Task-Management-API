@@ -10,6 +10,7 @@ use App\Http\Controllers\Actions\UpdateAction;
 
 
 
+
 trait SyncResponseObject
 {
     public $category = [];
@@ -44,10 +45,9 @@ class ActionController extends SyncController
     use SyncResponseObject;
 
 
-    
     public function __construct($collection)
     {   
-
+       
         foreach($collection as  $part)
         {
             $model = explode("_",$part['type'])[0];
@@ -65,8 +65,9 @@ class ActionController extends SyncController
     }
     
     public function add($items,$model,$temp_id)
-    {       
-        $add = AddAction::$model($items);
+    {   
+       
+        $add = AddAction::$model($items,$temp_id);
         array_push($this->$model,$add);
 
         // temp id storing to the data.

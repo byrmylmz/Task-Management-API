@@ -47,6 +47,11 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::middleware(['auth:sanctum','trial'])->group(function(){
 
+        // tst
+        Route::get('test', function(){
+            return auth()->user()->categories()->latest()->first()->order;
+
+        });
         // permission
         Route::get('permissions', function(){
             return auth()->user()->getAllPermissions()->pluck('name');
