@@ -72,7 +72,8 @@ class ActionController extends SyncController
         array_push($this->$model,$add);
 
         // temp id storing to the data.
-        $this->temp_id_store[$items["temp_id"]]=$add;
+        $keyValue=["temp_id"=>$items["temp_id"],"id"=>$add];
+        array_push($this->temp_id_store,$keyValue);
             
     }
 
