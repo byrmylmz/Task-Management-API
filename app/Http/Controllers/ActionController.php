@@ -54,24 +54,25 @@ class ActionController extends SyncController
             $action = explode("_",$part['type'])[1];
 
             // temp id is only with adding actions
-            if(isset($part['temp_id'])){
-                $temp_id=$part['temp_id'];
-                $this->$action($part['items'],$model,$temp_id);
-            }else{
-                $this->$action($part['items'],$model);
-            }
-
+            // if(isset($part['temp_id'])){
+            //     $temp_id=$part['temp_id'];
+            //     $this->$action($part['items'],$model,$temp_id);
+            // }else{
+            //     $this->$action($part['items'],$model);
+            // }
+            
+            $this->$action($part['items'],$model);
         }
     }
     
-    public function add($items,$model,$temp_id)
+    public function add($items,$model)
     {   
        
-        $add = AddAction::$model($items,$temp_id);
+        $add = AddAction::$model($items);
         array_push($this->$model,$add);
 
         // temp id storing to the data.
-        $this->temp_id_store[$temp_id]=$add;
+        $this->temp_id_store[$items["temp_id"]]=$add;
             
     }
 
