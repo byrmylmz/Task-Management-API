@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     use HasFactory;
-    protected $fillable=['temp_id','user_id','title','column_id','order'];
+    protected $fillable=['temp_id','user_id','title','description','column_id','order'];
     /**
      * The booted method of the model.
      */
