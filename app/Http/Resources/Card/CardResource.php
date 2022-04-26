@@ -21,6 +21,7 @@ class CardResource extends JsonResource
        return[
            'id'=>$this->id,
            'title'=>$this->title,
+           'description'=>$this->description,
            'order'=>$this->order,
            'tasks'=>TaskResource::collection($this->tasks),
        ];
