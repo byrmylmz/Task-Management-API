@@ -18,10 +18,10 @@ class CreateTasksTable extends Migration
             $table->uuid('temp_id')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->foreignId('card_id')->constrained()->onDelete('cascade');
             $table->boolean('checked')->default(false);
-            $table->integer('order');
+            $table->decimal('order', $precision = 32, $scale = 16);
             $table->timestamps();
         });
     }

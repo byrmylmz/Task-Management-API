@@ -36,13 +36,13 @@ Route::get('/', function () {
     Route::post('/google/webhook', GoogleWebhookController::class);
 
 
-
+    // broadcast test
     Route::get('/broadcast',function(){
         $userId=4;
         CalendarSync::dispatch($userId);
     });
 
-
+    // redis test
     Route::get('/redis',function(){
        $redis = Redis::connection();
     try {
