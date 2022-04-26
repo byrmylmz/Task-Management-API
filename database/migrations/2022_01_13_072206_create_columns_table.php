@@ -18,7 +18,6 @@ class CreateColumnsTable extends Migration
             $table->uuid('temp_id')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
-            $table->text('description')->nullable();
             $table->foreignId('board_id')->constrained()->onDelete('cascade');
             $table->decimal('order', $precision = 32, $scale = 16);
             $table->timestamps();
