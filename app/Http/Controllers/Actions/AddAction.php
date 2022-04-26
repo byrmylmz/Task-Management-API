@@ -48,6 +48,7 @@ class AddAction extends ActionController
         $add = Column::create([
             'user_id'=>auth()->user()->id,
             'title'=>$items['title'],
+            'description'=>$items['description'],
             'board_id'=>$items['board_id'],
             'temp_id'=>$items['temp_id'],
             'order'=>$order+1,
