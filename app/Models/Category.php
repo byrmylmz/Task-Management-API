@@ -11,6 +11,15 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable=['temp_id','user_id','title','order'];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'order' => 'float',
+    ];
     /**
      * The booted method of the model.
      */

@@ -9,7 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 class Column extends Model
 {
     use HasFactory;
+
     protected $fillable=['temp_id','user_id','title','board_id','order'];
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'order' => 'float',
+    ];
+
     /**
      * The booted method of the model.
      */

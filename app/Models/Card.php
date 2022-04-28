@@ -9,7 +9,18 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     use HasFactory;
+    
     protected $fillable=['temp_id','user_id','title','description','column_id','order'];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'order' => 'float',
+    ];
+
     /**
      * The booted method of the model.
      */
