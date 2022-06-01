@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'slack'],
+            'channels' => ['single', 'slack','emergency'],
             'ignore_exceptions' => false,
         ],
 
@@ -59,7 +59,7 @@ return [
             'url' => "https://hooks.slack.com/services/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",
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'emergency', 'alert','critical', 'error', 'warning', 'notice', 'info'),
         ],
 
         'papertrail' => [
