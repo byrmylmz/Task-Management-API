@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\PeriodicSynchronizations;
+use App\Jobs\RefreshWebhookSynchronizations;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
