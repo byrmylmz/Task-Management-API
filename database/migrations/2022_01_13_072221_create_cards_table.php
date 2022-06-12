@@ -21,6 +21,9 @@ class CreateCardsTable extends Migration
             $table->text('description')->nullable();
             $table->foreignId('column_id')->constrained()->onDelete('cascade');
             $table->decimal('order', $precision = 32, $scale = 16);
+            $table->boolean('checked')->default(false);
+            $table->dateTimeTz('start', $precision = 0);
+            $table->dateTimeTz('end', $precision = 0);
             $table->timestamps();
         });
     }

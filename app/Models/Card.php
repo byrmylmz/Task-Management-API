@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use App\Scopes\UserIdScope;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Card extends Model
 {
     use HasFactory;
     
-    protected $fillable=['temp_id','user_id','title','description','column_id','order'];
+    protected $fillable=['temp_id','user_id','title','description','column_id','order','checked','start','end'];
 
     /**
      * The attributes that should be casted to native types.
@@ -20,6 +21,17 @@ class Card extends Model
     protected $casts = [
         'order' => 'float',
     ];
+
+    public function getStartAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-dTH:i:sZ');
+    }
+
+    public function getEndAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-dTH:i:sZ');
+    }
+
 
     /**
      * The booted method of the model.

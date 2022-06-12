@@ -65,6 +65,8 @@ class AddAction extends ActionController
             'description'=>$items['description'],
             'column_id'=>$items['column_id'],
             'temp_id'=>$items['temp_id'],
+            'start'=>$items['start'],
+            'end'=>$items['end'],
             'order'=>$order+1,
         ]);
         return $add->id;

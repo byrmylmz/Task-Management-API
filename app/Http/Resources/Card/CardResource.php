@@ -23,6 +23,9 @@ class CardResource extends JsonResource
            'title'=>$this->title,
            'description'=>$this->description,
            'order'=>$this->order,
+           'start'=>$this->start,
+           'end'=>$this->end,
+           'checked'=>$this->checked,
            'tasks'=>TaskResource::collection($this->tasks),
        ];
 

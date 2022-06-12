@@ -122,7 +122,6 @@ class ActionController extends SyncController
         $find = $class::find($items['id']);
         $find->update([
             'checked'=>true,
-          
         ]);
         array_push($this->$model,$find->id);
         

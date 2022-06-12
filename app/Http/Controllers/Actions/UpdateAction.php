@@ -50,6 +50,8 @@ class UpdateAction extends ActionController
             'user_id'=>auth()->user()->id,
             'title'=>$items['title'],
             'description'=>$items['description'],
+            'start'=>$items['start'],
+            'end'=>$items['end'],
             // 'column_id'=>$items['column_id']
         ]);
         return $find->id;

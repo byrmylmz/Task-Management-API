@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory;
 use App\Models\Card;
 use App\Models\Column;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
-use Faker\Factory;
 
 class CardSeeder extends Seeder
 {
@@ -25,12 +26,18 @@ class CardSeeder extends Seeder
                 'title'=>$faker->word,
                 'user_id'=>$column->user_id,
                 'order'=>1,
+                'start'=> Carbon::now(),
+                'end'=> Carbon::now('+01:00'),
+
             ]);
             //second
             $column->cards()->create([
                 'title'=>$faker->word,
                 'user_id'=>$column->user_id,
                 'order'=>2,
+                'start'=> Carbon::now(),
+                'end'=> Carbon::now('+01:00'),
+
             ]);
           });
     }
