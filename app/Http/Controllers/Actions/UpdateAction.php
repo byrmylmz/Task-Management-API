@@ -62,6 +62,8 @@ class UpdateAction extends ActionController
             'user_id'=>auth()->user()->id,
             'title'=>$items['title'],
             'description'=>$items['description'],
+            'start'=>$items['start'],
+            'end'=>$items['end'],
             // 'card_id'=>$items['card_id']
         ]);
         return $find->id;

@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use DateTime;
+use Faker\Factory;
 use App\Models\Card;
 use App\Models\Task;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
-use Faker\Factory;
 
 class TaskSeeder extends Seeder
 {
@@ -25,6 +27,8 @@ class TaskSeeder extends Seeder
                 'title'=>$faker->word,
                 'user_id'=>$card->user_id,
                 'description'=>$faker->text,
+                'start'=> Carbon::now(),
+                'end'=> Carbon::now('+01:00'),
                 'order'=>1,
 
             ]);
@@ -33,6 +37,8 @@ class TaskSeeder extends Seeder
                 'title'=>$faker->word,
                 'user_id'=>$card->user_id,
                 'description'=>$faker->text,
+                'start'=> Carbon::now(),
+                'end'=> Carbon::now('+01:00'),
                 'order'=>2,
 
             ]);

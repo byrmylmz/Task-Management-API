@@ -80,6 +80,8 @@ class AddAction extends ActionController
             'description'=>$items['description'],
             'card_id'=>$items['card_id'],
             'temp_id'=>$items['temp_id'],
+            'start'=>$items['start'],
+            'end'=>$items['end'],
             'order'=>$order+1,
         ]);
         return $add->id;

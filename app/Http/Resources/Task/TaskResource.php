@@ -18,6 +18,8 @@ class TaskResource extends JsonResource
             'id'=>$this->id,
             'title'=>$this->title,
             'order'=>$this->order,
+            'start'=>$this->start,
+            'end'=>$this->end,
             'checked'=>$this->checked
         ];
     }
