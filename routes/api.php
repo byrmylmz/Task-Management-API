@@ -48,8 +48,8 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/swift',function(){
    $data = [ [
         'results'=>[
-            ['trackId'=>'1','trackName'=>'bayram','collectionName'=>'hayde'],
-            ['trackId'=>'2','trackName'=>'bayram','collectionName'=>'hayde'],
+            ['trackId'=>1,'trackName'=>'bayram','collectionName'=>'hayde'],
+            ['trackId'=>2,'trackName'=>'bayram','collectionName'=>'hayde'],
             ]
     ]
         ];
