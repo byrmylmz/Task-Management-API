@@ -10,7 +10,7 @@ class Board extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['temp_id','user_id','category_id','title','order'];
+    protected $fillable = ['temp_id','user_id','category_id','title','order','inbox_board'];
     
     /**
      * The attributes that should be casted to native types.
