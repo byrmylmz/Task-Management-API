@@ -19,6 +19,7 @@ class BoardWithColumnResource extends JsonResource
           'id'=>$this->id,
           'title'=>$this->title,
           'order'=>$this->order,
+          'inbox_board'=>$this->inbox_board,
           'columns'=>ColumnResource::collection($this->columns->load('cards'))
       ];
     }
