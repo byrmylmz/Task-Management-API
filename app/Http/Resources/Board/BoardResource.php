@@ -19,6 +19,7 @@ class BoardResource extends JsonResource
             'id'=>$this->id,
             'title'=>$this->title,
             'order'=>$this->order,
+            'inbox_board'=>$this->inbox_board,
             'category_id'=>$this->category_id
         ];
 
