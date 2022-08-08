@@ -20,7 +20,7 @@ class CreateBoardsTable extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->decimal('order', $precision = 32, $scale = 16);
-            $table->boolean('inbox_board')->default(false);
+            $table->boolean('inbox_board');
             $table->timestamps();
         });
     }
